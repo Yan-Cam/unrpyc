@@ -23,15 +23,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="SAP FUNCTION ALV的设置与使用 ALV：SAPListViewer  LAYOUT设置 用于设置ALV整体输出格式，为ALV可选参数。属于类型池 TYPE-POOLS:SLIS  代码定义： 123TYPE-POOLS:slis.DATA: layout TYPE slis_layout_alv.layout-[字段名] &#x3D; ‘xxxx’.     字段名 长度 类型参考 描述">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/function_alv.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/function_alv.PNG">
 <meta property="article:published_time" content="2023-07-29T15:00:00.000Z">
-<meta property="article:modified_time" content="2023-07-30T10:07:47.580Z">
+<meta property="article:modified_time" content="2023-07-30T18:07:47.321Z">
 <meta property="article:author" content="unrpyc">
 <meta property="article:tag" content="SAP">
 <meta property="article:tag" content="ABAP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/function_alv.jpg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/function_alv.PNG">
   
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>FUNCTION ALV的设置与使用 - Hexo</title>
@@ -98,7 +100,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
+      <strong>UNRPYC的博客</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -1003,7 +1005,6 @@
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">CALLFUNCTION&#x27;REUSE_ALV_LIST_DISPLAY&#x27;<br>* EXPORTING<br>*   I_INTERFACE_CHECK              = &#x27; &#x27;<br>*   I_BYPASSING_BUFFER             =<br>*   I_BUFFER_ACTIVE                = &#x27; &#x27;<br>*   I_CALLBACK_PROGRAM             = &#x27; &#x27;<br>*   I_CALLBACK_PF_STATUS_SET       = &#x27; &#x27;<br>*   I_CALLBACK_USER_COMMAND        = &#x27; &#x27;<br>*   I_STRUCTURE_NAME               =<br>*   IS_LAYOUT                      =<br>*   IT_FIELDCAT                    =<br>*   IT_EXCLUDING                   =<br>*   IT_SPECIAL_GROUPS              =<br>*   IT_SORT                        =<br>*   IT_FILTER                      =<br>*   IS_SEL_HIDE                    =<br>*   I_DEFAULT                      = &#x27;X&#x27;<br>*   I_SAVE                         = &#x27; &#x27;<br>*   IS_VARIANT                     =<br>*   IT_EVENTS                      =<br>*   IT_EVENT_EXIT                  =<br>*   IS_PRINT                       =<br>*   IS_REPREP_ID                   =<br>*   I_SCREEN_START_COLUMN          = 0<br>*   I_SCREEN_START_LINE            = 0<br>*   I_SCREEN_END_COLUMN            = 0<br>*   I_SCREEN_END_LINE              = 0<br>*   IR_SALV_LIST_ADAPTER           =<br>*   IT_EXCEPT_QINFO                =<br>*   I_SUPPRESS_EMPTY_DATA          = ABAP_FALSE<br>* IMPORTING<br>*   E_EXIT_CAUSED_BY_CALLER        =<br>*   ES_EXIT_CAUSED_BY_USER         =<br>TABLES<br>  t_outtab                       =<br>* EXCEPTIONS<br>*   PROGRAM_ERROR                  = 1<br>*   OTHERS                         = 2<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://images0.cnblogs.com/blog/717614/201502/141043449648287.png" srcset="/img/loading.gif" lazyload alt="image004[6]"></p>
 <h2 id="EVENT设置"><a href="#EVENT设置" class="headerlink" title="EVENT设置"></a>EVENT设置</h2><p>需要将<code>gt_events </code>配置到函数参数中：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">IT_EVENTS = gt_event<br></code></pre></td></tr></table></figure>
 
@@ -1141,8 +1142,7 @@
 <p>颜色参考表如下：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230730172603207.png" srcset="/img/loading.gif" lazyload alt="image-20230730172603207"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230730172642005.png" srcset="/img/loading.gif" lazyload alt="image-20230730172642005"></p>
-<h3 id="列颜色"><a href="#列颜色" class="headerlink" title="列颜色"></a>列颜色</h3><p><img src="https://images0.cnblogs.com/blog/717614/201502/141044019338604.png" srcset="/img/loading.gif" lazyload alt="image028[6]"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">TYPE-POOLS:slis.<br>DATA: gt_fieldcat TYPE slis_t_fieldcat_alv WITH HEADER LINE.<br>DATA: gt_sort TYPE slis_t_sortinfo_alv WITH HEADER LINE.<br>DATA:BEGIN OF gt_data OCCURS 0,<br>  curr TYPE ekpo-netpr,<br>  int TYPE i,<br>  p TYPE p LENGTH 5 DECIMALS 2,<br>  END OF gt_data.<br><br>START-OF-SELECTION.<br>  PERFORM inital.<br>  DEFINE fill_fdcat.<br>    clear gt_fieldcat.<br>    gt_fieldcat-fieldname = &amp;1.<br>    gt_fieldcat-seltext_l = &amp;2.<br>    if &amp;1 = &#x27;CURR&#x27; .<br>      &quot;设置列颜色<br>      gt_fieldcat-emphasize = &#x27;C510&#x27;.<br>    endif.<br>    if &amp;1 = &#x27;INT&#x27; .<br>      gt_fieldcat-emphasize = &#x27;C610&#x27;.<br>    endif.<br>    append gt_fieldcat.<br>  END-OF-DEFINITION.<br><br>  fill_fdcat &#x27;CURR&#x27; &#x27;CURR&#x27; .<br>  fill_fdcat &#x27;INT&#x27; &#x27;INT&#x27; .<br>  fill_fdcat &#x27;P&#x27; &#x27;P(3.2)&#x27; .<br><br>  CALL FUNCTION &#x27;REUSE_ALV_GRID_DISPLAY&#x27;<br>    EXPORTING<br>      i_callback_program = sy-repid<br>      it_fieldcat        = gt_fieldcat[]<br>    TABLES<br>      t_outtab           = gt_data[].<br><br>FORM inital .<br>  gt_data-curr = 1.<br>  gt_data-int = 1.<br>  gt_data-p = 1.<br>  APPEND gt_data.<br>  gt_data-curr = 2.<br>  gt_data-int = 2.<br>  gt_data-p = 2.<br>  APPEND gt_data.<br>ENDFORM.<br></code></pre></td></tr></table></figure>
+<h3 id="列颜色"><a href="#列颜色" class="headerlink" title="列颜色"></a>列颜色</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">TYPE-POOLS:slis.<br>DATA: gt_fieldcat TYPE slis_t_fieldcat_alv WITH HEADER LINE.<br>DATA: gt_sort TYPE slis_t_sortinfo_alv WITH HEADER LINE.<br>DATA:BEGIN OF gt_data OCCURS 0,<br>  curr TYPE ekpo-netpr,<br>  int TYPE i,<br>  p TYPE p LENGTH 5 DECIMALS 2,<br>  END OF gt_data.<br><br>START-OF-SELECTION.<br>  PERFORM inital.<br>  DEFINE fill_fdcat.<br>    clear gt_fieldcat.<br>    gt_fieldcat-fieldname = &amp;1.<br>    gt_fieldcat-seltext_l = &amp;2.<br>    if &amp;1 = &#x27;CURR&#x27; .<br>      &quot;设置列颜色<br>      gt_fieldcat-emphasize = &#x27;C510&#x27;.<br>    endif.<br>    if &amp;1 = &#x27;INT&#x27; .<br>      gt_fieldcat-emphasize = &#x27;C610&#x27;.<br>    endif.<br>    append gt_fieldcat.<br>  END-OF-DEFINITION.<br><br>  fill_fdcat &#x27;CURR&#x27; &#x27;CURR&#x27; .<br>  fill_fdcat &#x27;INT&#x27; &#x27;INT&#x27; .<br>  fill_fdcat &#x27;P&#x27; &#x27;P(3.2)&#x27; .<br><br>  CALL FUNCTION &#x27;REUSE_ALV_GRID_DISPLAY&#x27;<br>    EXPORTING<br>      i_callback_program = sy-repid<br>      it_fieldcat        = gt_fieldcat[]<br>    TABLES<br>      t_outtab           = gt_data[].<br><br>FORM inital .<br>  gt_data-curr = 1.<br>  gt_data-int = 1.<br>  gt_data-p = 1.<br>  APPEND gt_data.<br>  gt_data-curr = 2.<br>  gt_data-int = 2.<br>  gt_data-p = 2.<br>  APPEND gt_data.<br>ENDFORM.<br></code></pre></td></tr></table></figure>
 
 <h3 id="单元格颜色"><a href="#单元格颜色" class="headerlink" title="单元格颜色"></a>单元格颜色</h3><p><img src="https://images0.cnblogs.com/blog/717614/201502/141044024489045.png" srcset="/img/loading.gif" lazyload alt="image029[6]"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">TYPE-POOLS:slis.<br>DATA: gt_fieldcat TYPE slis_t_fieldcat_alv WITH HEADER LINE.<br>DATA: gs_layout TYPE slis_layout_alv.<br><br>DATA:BEGIN OF gt_data OCCURS 0,<br>  val1(40),&quot;颜色值<br>  val2(40),&quot;颜色值<br>  val3(40),<br>  colortable TYPE slis_t_specialcol_alv, &quot;每行中的单元格颜色内表，可对多个单元格进行不同颜色设置<br>  END OF gt_data.<br>&quot;每行中单元格颜色列表<br>DATA: gt_color TYPE slis_t_specialcol_alv WITH HEADER LINE.<br><br>START-OF-SELECTION.<br>  PERFORM inital.<br>  DEFINE fill_fdcat.<br>    clear gt_fieldcat.<br>    gt_fieldcat-fieldname = &amp;1.<br>    gt_fieldcat-seltext_l = &amp;2.<br>    append gt_fieldcat.<br>  END-OF-DEFINITION.<br><br>  fill_fdcat &#x27;VAL1&#x27; &#x27;颜色值&#x27;.<br>  fill_fdcat &#x27;VAL2&#x27; &#x27;颜色值&#x27;.<br>  fill_fdcat &#x27;VAL3&#x27; &#x27;无颜色&#x27;.<br><br>  gs_layout-coltab_fieldname = &#x27;COLORTABLE&#x27;.&quot;设置输出内表中哪列为颜色列表<br><br>  CALL FUNCTION &#x27;REUSE_ALV_GRID_DISPLAY&#x27;<br>    EXPORTING<br>      it_fieldcat = gt_fieldcat[]<br>      is_layout   = gs_layout<br>    TABLES<br>      t_outtab    = gt_data.<br><br>FORM inital .<br>  DATA: c1,c2.<br>  DO 7 TIMES.<br>    c1 = gt_color-color-col = sy-index - 1.&quot;颜色值<br>    DO 2 TIMES.<br>      c2 = gt_color-color-int =  sy-index - 1.&quot;颜色亮度<br>      gt_color-color-inv = &#x27;0&#x27;.&quot;颜色作用于背景<br>      CASE sy-index .<br>        WHEN 1.<br>          gt_color-fieldname = &#x27;VAL1&#x27;.&quot;需进行颜色设置的列名（已具体到单元格）<br>          CONCATENATE &#x27;col=&#x27; c1 ` ` &#x27;int=&#x27; c2 ` `  &#x27;inv=0&#x27;  INTO gt_data-val1 .<br>        WHEN 2.<br>          gt_color-fieldname = &#x27;VAL2&#x27;.&quot;需进行颜色设置的列名（已具体到单元格）<br>          CONCATENATE &#x27;col=&#x27; c1 ` ` &#x27;int=&#x27; c2 ` `  &#x27;inv=0&#x27;  INTO gt_data-val2 .<br>      ENDCASE.<br>      APPEND gt_color.<br>    ENDDO.<br>    &quot;设置每行数据中单元格的颜色内表<br>    gt_data-colortable = gt_color[].<br>    gt_data-val3 = &#x27;无颜色&#x27;.<br>    APPEND gt_data.<br>    CLEAR:gt_color,gt_color[].<br>  ENDDO.<br></code></pre></td></tr></table></figure>
@@ -1173,6 +1173,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ABAP/" class="category-chain-item">ABAP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
     <div class="post-meta">
@@ -1236,6 +1257,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/07/29/SMARTFORMS/" title="SMARTFORMS">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SMARTFORMS</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -1342,6 +1369,30 @@
        <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
   
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
   
   
   
@@ -1488,6 +1539,8 @@
   <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 

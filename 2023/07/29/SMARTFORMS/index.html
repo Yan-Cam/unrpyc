@@ -1,0 +1,1070 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="unrpyc">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SMARTFORMS SAP所提供的一款功能强大的商务报表解决方案，也被称为智能表单  Smart Forms基本概念能够按指定格式生成报表，并可以将执行结果通过连接打印机直接输出 采用图形模式来控制报表的格式及位置 基本事务代码：  SMARTFORMS：维护表单 SMARTSTYLES：维护格式  Smart Forms原理： 定义内表后，在程序中通过SQL查询将需要的数据放入内表，然后通过函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SMARTFORMS">
+<meta property="og:url" content="http://example.com/2023/07/29/SMARTFORMS/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SMARTFORMS SAP所提供的一款功能强大的商务报表解决方案，也被称为智能表单  Smart Forms基本概念能够按指定格式生成报表，并可以将执行结果通过连接打印机直接输出 采用图形模式来控制报表的格式及位置 基本事务代码：  SMARTFORMS：维护表单 SMARTSTYLES：维护格式  Smart Forms原理： 定义内表后，在程序中通过SQL查询将需要的数据放入内表，然后通过函">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214353962.png">
+<meta property="article:published_time" content="2023-07-29T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-31T13:53:34.999Z">
+<meta property="article:author" content="unrpyc">
+<meta property="article:tag" content="SAP">
+<meta property="article:tag" content="ABAP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214353962.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>SMARTFORMS - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>UNRPYC的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SMARTFORMS"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-29 23:00" pubdate>
+          2023年7月29日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          77 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">SMARTFORMS</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="SMARTFORMS"><a href="#SMARTFORMS" class="headerlink" title="SMARTFORMS"></a>SMARTFORMS</h1><blockquote>
+<p>SAP所提供的一款功能强大的商务报表解决方案，也被称为智能表单</p>
+</blockquote>
+<h2 id="Smart-Forms基本概念"><a href="#Smart-Forms基本概念" class="headerlink" title="Smart Forms基本概念"></a>Smart Forms基本概念</h2><p>能够按指定格式生成报表，并可以将执行结果通过连接打印机直接输出</p>
+<p>采用图形模式来控制报表的格式及位置</p>
+<p>基本事务代码：</p>
+<ul>
+<li>SMARTFORMS：维护表单</li>
+<li>SMARTSTYLES：维护格式</li>
+</ul>
+<p>Smart Forms原理：</p>
+<p>定义内表后，在程序中通过SQL查询将需要的数据放入内表，然后通过函数调用SMARTFORM。在执行SMARTFORM时把内表中的数据填充到所画的表格当中，并显示出来。</p>
+<h2 id="Smart-Forms界面使用方法"><a href="#Smart-Forms界面使用方法" class="headerlink" title="Smart Forms界面使用方法"></a>Smart Forms界面使用方法</h2><h3 id="事务代码：SMARTFORMS"><a href="#事务代码：SMARTFORMS" class="headerlink" title="事务代码：SMARTFORMS"></a>事务代码：SMARTFORMS</h3><p>文本</p>
+<ul>
+<li>创建Smartforms 及相关对象属性设置</li>
+</ul>
+<p>样式</p>
+<ul>
+<li>指定FORM中的文本属性</li>
+<li>字体&#x2F;颜色&#x2F;大小等</li>
+</ul>
+<p>文本模块</p>
+<ul>
+<li>很多对象、文本、消息、提示内容都可以预先设定，可以复用的文本模块多在此设定</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731193837505.png" srcset="/img/loading.gif" lazyload alt="SMARTFORMS界面"></p>
+<h3 id="SAP-Form-Builder"><a href="#SAP-Form-Builder" class="headerlink" title="SAP Form Builder"></a>SAP Form Builder</h3><h4 id="Navigation-Menu"><a href="#Navigation-Menu" class="headerlink" title="Navigation Menu"></a>Navigation Menu</h4><p>Smart Form开发的Form element、节点、在此显示，在窗口左边显示</p>
+<h4 id="Maintenance-Frame"><a href="#Maintenance-Frame" class="headerlink" title="Maintenance Frame"></a>Maintenance Frame</h4><p>选择的节点属性在此设定，在窗口的中间部分显示</p>
+<h4 id="Form-Painter"><a href="#Form-Painter" class="headerlink" title="Form Painter"></a>Form Painter</h4><p>按钮出现form Painter,在窗口的最右边，显示windows和graphics的位置，大小，布局</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731194155982.png" srcset="/img/loading.gif" lazyload alt="Builder界面"></p>
+<table>
+<thead>
+<tr>
+<th><strong>元素</strong></th>
+<th><strong>中文</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Page</td>
+<td>页面</td>
+<td>不同的页面允许维护不同的格式</td>
+</tr>
+<tr>
+<td>Window</td>
+<td>窗体</td>
+<td>包括主窗体和子窗体，后续节点包括Window和Page以外的所有节点</td>
+</tr>
+<tr>
+<td>Graphic</td>
+<td>图形</td>
+<td>输出页面中的图片</td>
+</tr>
+<tr>
+<td>Address</td>
+<td>地址</td>
+<td>包含数据库中的标准地址</td>
+</tr>
+<tr>
+<td>Template</td>
+<td>模板</td>
+<td>输出包含静态数据的表格（固定行列）</td>
+</tr>
+<tr>
+<td>Table</td>
+<td>表</td>
+<td>输出包含应用数据的表格（可自动扩展）</td>
+</tr>
+<tr>
+<td>Alternative</td>
+<td>是非判断</td>
+<td>执行判断，根据判断结果是非执行两个分支</td>
+</tr>
+<tr>
+<td>Program Lines</td>
+<td>程序代码</td>
+<td>指定传入传出参数，执行ABAP代码</td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>循环</td>
+<td>反复执行后续节点</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>文本</td>
+<td>输出文本&#x2F;变量&#x2F;文本模块</td>
+</tr>
+<tr>
+<td>Command</td>
+<td>命令</td>
+<td>命令操作（如分页）</td>
+</tr>
+<tr>
+<td>Folder</td>
+<td>文件夹</td>
+<td>将多个后续节点组合为一个组</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731194928184.png" srcset="/img/loading.gif" lazyload alt="图标对应功能参考"></p>
+<h3 id="所有的Form-Global-Setting节点和Pages-and-window在这显示。"><a href="#所有的Form-Global-Setting节点和Pages-and-window在这显示。" class="headerlink" title="所有的Form Global Setting节点和Pages and window在这显示。"></a>所有的Form Global Setting节点和Pages and window在这显示。</h3><ul>
+<li>Global Settings 全局设定</li>
+<li>Form attributes : 基本信息和格式设定</li>
+</ul>
+<h3 id="设置页面样式，指定输出样式（Smartstyles下面创建的样式）"><a href="#设置页面样式，指定输出样式（Smartstyles下面创建的样式）" class="headerlink" title="设置页面样式，指定输出样式（Smartstyles下面创建的样式）"></a>设置页面样式，指定输出样式（Smartstyles下面创建的样式）</h3><ul>
+<li>Form interface : 输入输出参数。在此设定与调用程序间传的参数</li>
+<li>Global definitions : Smart Forms中内部使用的私有变量，不与外界交互.</li>
+</ul>
+<h3 id="Pages-and-windows"><a href="#Pages-and-windows" class="headerlink" title="Pages and windows"></a>Pages and windows</h3><ul>
+<li>显示数据和设定Page页面和windows窗口布局</li>
+</ul>
+<h3 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h3><ul>
+<li>根据元素的清单，自上而下的执行</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731194517321.png" srcset="/img/loading.gif" lazyload alt="示例图片"></p>
+<h3 id="数据定义"><a href="#数据定义" class="headerlink" title="数据定义"></a>数据定义</h3><h4 id="Form-Interface"><a href="#Form-Interface" class="headerlink" title="Form Interface"></a>Form Interface</h4><ul>
+<li>用于数据传输，导入&#x2F;导出参数，表格传输，异常</li>
+<li>结构及表需要参照数据字典中定义的结构&#x2F;表类型进行定义</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731194759684.png" srcset="/img/loading.gif" lazyload alt="Form Interface"></p>
+<h4 id="Global-Definition"><a href="#Global-Definition" class="headerlink" title="Global Definition"></a>Global Definition</h4><ul>
+<li>定义Smartforms内部使用变量</li>
+<li>设置类型、字段符号（动态指定变量）、初始化等设置</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731194825419.png" srcset="/img/loading.gif" lazyload alt="Global Definition"></p>
+<h3 id="页面（PAGE）"><a href="#页面（PAGE）" class="headerlink" title="页面（PAGE）"></a>页面（PAGE）</h3><blockquote>
+<p>Smartforms允许建立多个页面，而且不同的页面允许维护不同的格式</p>
+</blockquote>
+<p>例如封面&#x2F;正文</p>
+<p>可包含节点：</p>
+<p>窗体</p>
+<ul>
+<li>包括主窗体和子窗体</li>
+<li>后续节点包括除Window和Page外所有节点</li>
+</ul>
+<p>图形</p>
+<ul>
+<li>输出页面中的图片</li>
+</ul>
+<p>地址</p>
+<ul>
+<li>包含数据库中的标准地址</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731200614808.png" srcset="/img/loading.gif" lazyload alt="页面1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731200651652.png" srcset="/img/loading.gif" lazyload alt="页面2"></p>
+<h3 id="窗体（WINDOWW）"><a href="#窗体（WINDOWW）" class="headerlink" title="窗体（WINDOWW）"></a>窗体（WINDOWW）</h3><blockquote>
+<p>作为容器，放置显示用元素（元素累计宽高不能超过窗体宽度高度）</p>
+</blockquote>
+<p>Smartforms中一般是通过多个窗体来存放不同的内容。</p>
+<p>动态数据主要存储在主窗体中</p>
+<ul>
+<li>主窗体在所有页面中是一致的</li>
+<li>一个页面中至少包含且只能包含一个主窗体</li>
+</ul>
+<p>其他数据通过子窗体来实现</p>
+<ul>
+<li>一个页面中可以包含多个子窗体</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731200846893.png" srcset="/img/loading.gif" lazyload alt="窗体1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731200900790.png" srcset="/img/loading.gif" lazyload alt="窗体2"></p>
+<h3 id="图片（Graphic）"><a href="#图片（Graphic）" class="headerlink" title="图片（Graphic）"></a>图片（Graphic）</h3><blockquote>
+<p>Smartforms所制作的报表中，通常需要加入一些特定的图像，如公司的Logo、商标等。此时使用图片组件，可以加入系统中存在的图片</p>
+</blockquote>
+<ul>
+<li>选择要插入的图片，黑白&#x2F;彩色设置</li>
+</ul>
+<h4 id="向系统中增加图片（SE78）"><a href="#向系统中增加图片（SE78）" class="headerlink" title="向系统中增加图片（SE78）"></a>向系统中增加图片（SE78）</h4><p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731201109323.png" srcset="/img/loading.gif" lazyload alt="插入图片步骤1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731201616930.png" srcset="/img/loading.gif" lazyload alt="插入图片步骤1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731201701730.png" srcset="/img/loading.gif" lazyload alt="插入图片步骤3"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731201824116.png" srcset="/img/loading.gif" lazyload alt="插入图片步骤4"></p>
+<h3 id="地址（Address）"><a href="#地址（Address）" class="headerlink" title="地址（Address）"></a>地址（Address）</h3><blockquote>
+<p>引用数据库中已经定义过的地址，显示在界面指定位置</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731202044186.png" srcset="/img/loading.gif" lazyload alt="地址1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731202100630.png" srcset="/img/loading.gif" lazyload alt="地址2"></p>
+<h3 id="模板（Template）"><a href="#模板（Template）" class="headerlink" title="模板（Template）"></a>模板（Template）</h3><blockquote>
+<p>用于实现输出数值的定位，进行固定行列的表格输出</p>
+</blockquote>
+<ul>
+<li>在绘图的界面中通过拖拽，使用画笔直接增加行&#x2F;列</li>
+<li>点击细节，可以对每行&#x2F;列进行宽高。</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li><strong>分行的总宽度不能超过表的宽度</strong></li>
+<li><strong>分列的总高度不能超过表的高度</strong></li>
+<li><strong>在模板中增加文本时，注意要指定对应的行&#x2F;列</strong></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731202248821.png" srcset="/img/loading.gif" lazyload alt="模板初步设计"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731202418231.png" srcset="/img/loading.gif" lazyload alt="边框模式设计"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731202435305.png" srcset="/img/loading.gif" lazyload alt="细节调整（点击第一张图的details）"></p>
+<h3 id="表（Table）-设置好后会自动循环"><a href="#表（Table）-设置好后会自动循环" class="headerlink" title="表（Table）(设置好后会自动循环)"></a>表（Table）(设置好后会自动循环)</h3><p>自动展开生成三部分</p>
+<ul>
+<li><p>表头</p>
+</li>
+<li><p>主要区域</p>
+</li>
+<li><p>脚标</p>
+</li>
+</ul>
+<p>表（Table）属性</p>
+<ul>
+<li>设置行类型，通过画笔直接规划分列、分行（绘制后自动扩展）</li>
+</ul>
+<p>数据（Data）属性</p>
+<ul>
+<li>设置数据来源（内表循环制结构，循环限制条件，排序条件等）</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731202756483.png" srcset="/img/loading.gif" lazyload alt="表示例图"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731202954103.png" srcset="/img/loading.gif" lazyload alt="表界面设计"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731203015793.png" srcset="/img/loading.gif" lazyload alt="表数据设置"></p>
+<p>向表中增加行</p>
+<ul>
+<li>选中表头&#x2F;主要区域&#x2F;脚标中的一部分，右键可以新建行</li>
+<li>新增加的行，选择行类型（从table中创建过的行类型中选择），自动扩展创建相应的cell（单元格）</li>
+<li>单元格不需要单独指定在表格中输出的位置，自上而下排列为表单中从左至右的顺序</li>
+<li>表中的每一个部分，可以创建多种行类型</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731203211683.png" srcset="/img/loading.gif" lazyload alt="创建行"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731203220729.png" srcset="/img/loading.gif" lazyload alt="设置行类型"></p>
+<h3 id="判断（Alternative）"><a href="#判断（Alternative）" class="headerlink" title="判断（Alternative）"></a>判断（Alternative）</h3><p>是非判断包含一个Condition（判断条件），以及两个分支条件</p>
+<ul>
+<li>按照对条件的判断结果分别执行是非部分</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731203353137.png" srcset="/img/loading.gif" lazyload alt="判断的示例图片"></p>
+<h3 id="程序代码（Program-Lines）"><a href="#程序代码（Program-Lines）" class="headerlink" title="程序代码（Program Lines）"></a>程序代码（Program Lines）</h3><blockquote>
+<p>程序代码组件允许用户在Smartforms中编辑ABAP代码，此部分类似于封装函数，和外界通过导入导出参数进行交互</p>
+</blockquote>
+<p>只有通过导入&#x2F;导出参数定义过的变量，才可以在程序代码中使用</p>
+<p>导入参数（Input Parameters）</p>
+<ul>
+<li>传入到程序代码块中的参数</li>
+</ul>
+<p>导出参数（Output Parameters）</p>
+<ul>
+<li>从程序代码快中传出的参数</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731203522755.png" srcset="/img/loading.gif" lazyload alt="代码示例图片"></p>
+<h3 id="循环（Loop）"><a href="#循环（Loop）" class="headerlink" title="循环（Loop）"></a>循环（Loop）</h3><blockquote>
+<p>循环中指定数据来源的内表以及循环输出使用的结构，可以实现将内表数据多行输出</p>
+</blockquote>
+<ul>
+<li>数据（Data）：指定数据来源</li>
+<li>计算（Calculation）</li>
+<li>事件（Events）：表头及脚标的输出设置</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731203623862.png" srcset="/img/loading.gif" lazyload alt="循环步骤1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731203651656.png" srcset="/img/loading.gif" lazyload alt="循环步骤2"></p>
+<h3 id="命令（Command）"><a href="#命令（Command）" class="headerlink" title="命令（Command）"></a>命令（Command）</h3><blockquote>
+<p>执行命令，如强制分页等</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731203742240.png" srcset="/img/loading.gif" lazyload alt="命令示例图片"></p>
+<h3 id="文件夹（Folder）"><a href="#文件夹（Folder）" class="headerlink" title="文件夹（Folder）"></a>文件夹（Folder）</h3><blockquote>
+<p>可以将节点下的元素进行成组管理</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731203831120.png" srcset="/img/loading.gif" lazyload alt="文件夹示例图片"></p>
+<h3 id="文本（Text）"><a href="#文本（Text）" class="headerlink" title="文本（Text）"></a>文本（Text）</h3><blockquote>
+<p>图示编辑器在新版本中不可使用，新版本MS编辑器只能手动输入</p>
+</blockquote>
+<p>显示文字</p>
+<ul>
+<li>在建立的Text组件中，直接输入文字内容</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731204042229.png" srcset="/img/loading.gif" lazyload alt="显示文字"></p>
+<p>显示变量</p>
+<ul>
+<li>选择字段清单，选择变量，直接拖拽到文本对象内（MS编辑器只能手动输入）</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731204111627.png" srcset="/img/loading.gif" lazyload alt="显示变量"></p>
+<h3 id="文本模块（Text-Module）"><a href="#文本模块（Text-Module）" class="headerlink" title="文本模块（Text Module）"></a>文本模块（Text Module）</h3><p>SMARTFORMS-&gt;创建Text Module，录入文字</p>
+<p>在Smartforms的Text元素中使用text module</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731210914019.png" srcset="/img/loading.gif" lazyload alt="文本模块步骤1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731211041903.png" srcset="/img/loading.gif" lazyload alt="文本模块步骤2"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731211117792.png" srcset="/img/loading.gif" lazyload alt="文本模块步骤3"></p>
+<h3 id="样式（Smart-Styles）"><a href="#样式（Smart-Styles）" class="headerlink" title="样式（Smart Styles）"></a>样式（Smart Styles）</h3><blockquote>
+<p>SmartFroms样式的作用是为了指定Form中的文本属性</p>
+</blockquote>
+<p>如文本的字体、颜色、大小等</p>
+<p>命名规则</p>
+<ul>
+<li>样式：Z&#x2F;Y开头</li>
+</ul>
+<p>包含内容</p>
+<ul>
+<li>表头（Header Data）</li>
+</ul>
+<p>设置默认的字体及段落格式</p>
+<ul>
+<li>段落（Paragraph Formats）</li>
+</ul>
+<p>设置段落格式（包含字符格式）</p>
+<ul>
+<li><p>字符（Character Formats）</p>
+</li>
+<li><p>独立的字符格式</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731211307458.png" srcset="/img/loading.gif" lazyload alt="创建样式步骤1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731211332627.png" srcset="/img/loading.gif" lazyload alt="创建样式步骤2"></p>
+<h4 id="表头"><a href="#表头" class="headerlink" title="表头"></a>表头</h4><p>标准设置</p>
+<ul>
+<li>标准段落：设置默认标准段落格式</li>
+<li>字符每英寸：设置字符间距（每英寸中文字符数）</li>
+<li>指标空间：制表符间距</li>
+<li>行每英寸：设置字符安监局（每行中文字符数）</li>
+<li>字体：字体类型&#x2F;大小&#x2F;风格</li>
+<li>下划线</li>
+<li>颜色</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731211439245.png" srcset="/img/loading.gif" lazyload alt="表头"></p>
+<h4 id="段落样式"><a href="#段落样式" class="headerlink" title="段落样式"></a>段落样式</h4><p>命名规则</p>
+<ul>
+<li>两位字符</li>
+</ul>
+<p>设置页签</p>
+<ul>
+<li>缩进和空格：段落的方式、页边距等设置</li>
+<li>字体：段落字体风格、大小、样式及颜色设置（SE73维护字体）</li>
+<li>标签：段落制表符设置（不推荐使用）</li>
+<li>编号和框架：段落列表编号方式设置</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731211538661.png" srcset="/img/loading.gif" lazyload alt="段落样式"></p>
+<h4 id="字体格式"><a href="#字体格式" class="headerlink" title="字体格式"></a>字体格式</h4><p>命名规则</p>
+<ul>
+<li>两位字符</li>
+</ul>
+<p>标准设置</p>
+<ul>
+<li>上标</li>
+<li>下标</li>
+<li>条形码（Bar Code）</li>
+</ul>
+<p>字体</p>
+<ul>
+<li>类型</li>
+<li>大小</li>
+<li>样式</li>
+<li>颜色</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731211714625.png" srcset="/img/loading.gif" lazyload alt="字体格式设置1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731211759752.png" srcset="/img/loading.gif" lazyload alt="字体格式设置2"></p>
+<h2 id="Smart-Forms的测试及调用"><a href="#Smart-Forms的测试及调用" class="headerlink" title="Smart Forms的测试及调用"></a>Smart Forms的测试及调用</h2><blockquote>
+<p>Smartforms是通过函数进行调用的</p>
+</blockquote>
+<h3 id="在Smartforms界面调用"><a href="#在Smartforms界面调用" class="headerlink" title="在Smartforms界面调用"></a>在Smartforms界面调用</h3><p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731212546570.png" srcset="/img/loading.gif" lazyload alt="检查后点击测试"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731212610155.png" srcset="/img/loading.gif" lazyload alt="进入此界面"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731212726892.png" srcset="/img/loading.gif" lazyload alt="激活后执行"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731212754387.png" srcset="/img/loading.gif" lazyload alt="再次执行"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731213106298.png" srcset="/img/loading.gif" lazyload alt="配置参数后点击预览即可LP01为模拟打印机"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731213219544.png" srcset="/img/loading.gif" lazyload alt="预览效果如下，没有数据是因为没在程序中调用"></p>
+<h3 id="在程序中调用"><a href="#在程序中调用" class="headerlink" title="在程序中调用"></a>在程序中调用</h3><p>获取函数名称</p>
+<blockquote>
+<p>Smartforms默认生成的册数函数名称在不同系统间可能不同，因此需要调用函数 SSF_FUNCTION_MODULE_NAME ，获取smartforms测试的函数名称</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">  CALL FUNCTION &#x27;SSF_FUNCTION_MODULE_NAME&#x27;<br>    EXPORTING<br>     formname         = &#x27;ZTEST0002&#x27;<br>\*     VARIANT         = &#x27; &#x27;<br>\*     DIRECT_CALL       = &#x27; &#x27;<br>   IMPORTING<br>     FM_NAME         = fm_name<br>   EXCEPTIONS<br>    NO_FORM         = 1<br>    NO_FUNCTION_MODULE    = 2<br>    OTHERS          = 3<br>        .<br>   IF sy-subrc &lt;&gt; 0.<br>\* Implement suitable error handling here<br>   ENDIF.<br></code></pre></td></tr></table></figure>
+
+<p>调用函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">CALL FUNCTION fm_name<br> EXPORTING<br> \*  ARCHIVE_INDEX       =<br> \*  ARCHIVE_INDEX_TAB     =<br> \*  ARCHIVE_PARAMETERS     =<br> \*  CONTROL_PARAMETERS     = l_control_parameters<br> \*  MAIL_APPL_OBJ       =<br> \*  MAIL_RECIPIENT       =<br> \*  MAIL_SENDER        =<br> \*  OUTPUT_OPTIONS       = l_output_options<br>   USER_SETTINGS       = &#x27;&#x27;<br>   NAME = SY-UNAME<br>   TIME = SY-UZEIT<br> \* IMPORTING<br> \*  DOCUMENT_OUTPUT_INFO    =<br> \*  JOB_OUTPUT_INFO      =<br> \*  JOB_OUTPUT_OPTIONS     = l_job_output_options<br>  TABLES<br>   GT_WORK = gt_zewmt0002out<br>  EXCEPTIONS<br>   FORMATTING_ERROR      = 1<br>   INTERNAL_ERROR       = 2<br>   SEND_ERROR         = 3<br>   USER_CANCELED       = 4<br>   OTHERS           = 5<br>      .<br> IF sy-subrc &lt;&gt; 0.<br> \* Implement suitable error handling here<br> ENDIF.<br>  ENDCASE.<br> ENDFORM.<br></code></pre></td></tr></table></figure>
+
+<p>使用Smartforms调用时的传输参数控制打印参数</p>
+<ul>
+<li>CONTROL_PARAMETERS</li>
+</ul>
+<p>例：实现直接显示预览界面</p>
+<ul>
+<li>OUTPUT_OPTIONS</li>
+</ul>
+<p>例：实现在打印窗口中不显示预览按钮，勾选快速打印按钮</p>
+<ul>
+<li>需要讲USER_SETTINGS值设置为空</li>
+</ul>
+<p>使用返回值判断打印结果</p>
+<ul>
+<li>JOB_OUTPUT_INFO</li>
+</ul>
+<p>例：OUTPUTDONE，判断打印是否完成</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214002849.png" srcset="/img/loading.gif" lazyload alt="打印参数示例图1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214036187.png" srcset="/img/loading.gif" lazyload alt="打印参数示例图2"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214112238.png" srcset="/img/loading.gif" lazyload alt="打印参数示例图2"></p>
+<h2 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h2><p>整体程序：</p>
+<p>smartform设置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214657769.png" srcset="/img/loading.gif" lazyload alt="大体设计"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214751544.png" srcset="/img/loading.gif" lazyload alt="参数设置1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214837353.png" srcset="/img/loading.gif" lazyload alt="参数设置2关联类型需要自己创建数据元素"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731215100866.png" srcset="/img/loading.gif" lazyload alt="表数据设置"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">*&amp;---------------------------------------------------------------------*<br> *&amp; Report ZTEST00020<br> *&amp;---------------------------------------------------------------------*<br> *&amp;<br> *&amp;---------------------------------------------------------------------*<br> REPORT ZTEST00020.<br> INCLUDE ZTEST00020_top.<br> INCLUDE ZTEST00020_form.<br><br> INITIALIZATION.<br><br><br> START-OF-SELECTION.<br>  PERFORM get_data.<br><br> END-OF-SELECTION.<br>  PERFORM display_data.<br> *&amp;---------------------------------------------------------------------*<br> *&amp; Form get_data<br> *&amp;---------------------------------------------------------------------*<br> *&amp; text<br> *&amp;---------------------------------------------------------------------*<br> *&amp; --&gt; p1    text<br> *&amp; &lt;-- p2    text<br> *&amp;---------------------------------------------------------------------*<br> FORM get_data .<br>  SELECT * FROM ZEWMT0002<br>  WHERE LGNUM IN @s_lgnum AND<br>     LGPLA IN @s_LGPLA AND<br>     MAKTX IN @s_MAKTX AND<br>     MATID IN @s_MATID<br>  INTO TABLE @gt_zewmt0002out.<br> ENDFORM.<br> *&amp;---------------------------------------------------------------------*<br> *&amp; Form build_fieldcat<br> *&amp;---------------------------------------------------------------------*<br> *&amp; text<br> *&amp;---------------------------------------------------------------------*<br> *&amp; --&gt; p1    text<br> *&amp; &lt;-- p2    text<br> *&amp;---------------------------------------------------------------------*<br> FORM build_fieldcat .<br>  %%add_fieldcat: &#x27;1&#x27; &#x27;LGNUM&#x27; &#x27;仓库号&#x27;,<br>          &#x27;2&#x27; &#x27;LNUMT&#x27; &#x27;仓库名称&#x27;,<br>          &#x27;3&#x27; &#x27;LGPLA&#x27; &#x27;库位&#x27;,<br>          &#x27;4&#x27; &#x27;MATID&#x27; &#x27;物料编号&#x27;,<br>          &#x27;5&#x27; &#x27;MAKTX&#x27; &#x27;物料描述&#x27;,<br>          &#x27;6&#x27; &#x27;BATCHID&#x27; &#x27;批次&#x27;,<br>          &#x27;7&#x27; &#x27;PKNUM&#x27; &#x27;包数&#x27;,<br>          &#x27;8&#x27; &#x27;QUAN&#x27; &#x27;库存量&#x27;,<br>          &#x27;9&#x27; &#x27;MEINS&#x27; &#x27;单位&#x27;,<br>          &#x27;10&#x27; &#x27;WPTYP&#x27; &#x27;包型&#x27;,<br>          &#x27;11&#x27; &#x27;WPWET&#x27; &#x27;单包重&#x27;,<br>          &#x27;12&#x27; &#x27;HUIDENT&#x27; &#x27;HU号&#x27;.<br> ENDFORM.<br> *&amp;---------------------------------------------------------------------*<br> *&amp; Form build_layout<br> *&amp;---------------------------------------------------------------------*<br> *&amp; text<br> *&amp;---------------------------------------------------------------------*<br> *&amp; --&gt; p1    text<br> *&amp; &lt;-- p2    text<br> *&amp;---------------------------------------------------------------------*<br> FORM build_layout .<br>  gs_layout-colwidth_optimize = &#x27;X&#x27;.<br> ENDFORM.<br> *&amp;---------------------------------------------------------------------*<br> *&amp; Form build_event<br> *&amp;---------------------------------------------------------------------*<br> *&amp; text<br> *&amp;---------------------------------------------------------------------*<br> *&amp; --&gt; p1    text<br> *&amp; &lt;-- p2    text<br> *&amp;---------------------------------------------------------------------*<br> FORM build_event .<br><br> ENDFORM.<br> *&amp;---------------------------------------------------------------------*<br> *&amp; Form display_data<br> *&amp;---------------------------------------------------------------------*<br> *&amp; text<br> *&amp;---------------------------------------------------------------------*<br> *&amp; --&gt; p1    text<br> *&amp; &lt;-- p2    text<br> *&amp;---------------------------------------------------------------------*<br> FORM display_data .<br>  IF gt_zewmt0002out IS NOT INITIAL.<br>   PERFORM build_fieldcat.<br>   PERFORM build_layout.<br>   PERFORM build_event.<br>   CALL FUNCTION &#x27;REUSE_ALV_GRID_DISPLAY&#x27;<br>   EXPORTING<br>    I_CALLBACK_PROGRAM        = SY-REPID<br>    I_CALLBACK_PF_STATUS_SET     = &#x27;SET_STATUS&#x27;<br>    I_CALLBACK_USER_COMMAND      = &#x27;FRM_USER_COMMAND&#x27;<br>    IS_LAYOUT             = gs_layout<br>    IT_FIELDCAT            = gt_fieldcat<br>    TABLES<br>     t_outtab             = gt_zewmt0002out<br>        .<br>   IF sy-subrc &lt;&gt; 0.<br> \* Implement suitable error handling here<br>   ENDIF.<br>  ENDIF.<br> ENDFORM.<br><br> FORM SET_STATUS USING RT_EXTAB TYPE SLIS_T_EXTAB.<br>  SET PF-STATUS &#x27;ZUI&#x27;.<br> ENDFORM.<br><br> FORM FRM_USER_COMMAND USING R_UCOMM LIKE SY-UCOMM RS_SELFIELD TYPE SLIS_SELFIELD.<br>  CASE R_UCOMM.<br>   WHEN &#x27;&amp;PRINT&#x27;.<br>    CALL FUNCTION &#x27;SSF_FUNCTION_MODULE_NAME&#x27;<br>     EXPORTING<br>      formname         = &#x27;ZTEST0002&#x27;<br> \*     VARIANT         = &#x27; &#x27;<br> \*     DIRECT_CALL       = &#x27; &#x27;<br>    IMPORTING<br>      FM_NAME         = fm_name<br>    EXCEPTIONS<br>     NO_FORM         = 1<br>     NO_FUNCTION_MODULE    = 2<br>     OTHERS          = 3<br>         .<br>    IF sy-subrc &lt;&gt; 0.<br> \* Implement suitable error handling here<br>    ENDIF.<br><br>  CALL FUNCTION fm_name<br> EXPORTING<br> \*  ARCHIVE_INDEX       =<br> \*  ARCHIVE_INDEX_TAB     =<br> \*  ARCHIVE_PARAMETERS     =<br> \*  CONTROL_PARAMETERS     = l_control_parameters<br> \*  MAIL_APPL_OBJ       =<br> \*  MAIL_RECIPIENT       =<br> \*  MAIL_SENDER        =<br> \*  OUTPUT_OPTIONS       = l_output_options<br>   USER_SETTINGS       = &#x27;&#x27;<br>   NAME = SY-UNAME<br>   TIME = SY-UZEIT<br> \* IMPORTING<br> \*  DOCUMENT_OUTPUT_INFO    =<br> \*  JOB_OUTPUT_INFO      =<br> \*  JOB_OUTPUT_OPTIONS     = l_job_output_options<br>  TABLES<br>   GT_WORK = gt_zewmt0002out<br>  EXCEPTIONS<br>   FORMATTING_ERROR      = 1<br>   INTERNAL_ERROR       = 2<br>   SEND_ERROR         = 3<br>   USER_CANCELED       = 4<br>   OTHERS           = 5<br>      .<br> IF sy-subrc &lt;&gt; 0.<br> \* Implement suitable error handling here<br> ENDIF.<br><br>  ENDCASE.<br> ENDFORM.<br></code></pre></td></tr></table></figure>
+
+<p>效果演示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214212129.png" srcset="/img/loading.gif" lazyload alt="运行效果1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214248541.png" srcset="/img/loading.gif" lazyload alt="运行效果2"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214317813.png" srcset="/img/loading.gif" lazyload alt="点击打印"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230731214353962.png" srcset="/img/loading.gif" lazyload alt="打印效果预览"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ABAP/" class="category-chain-item">ABAP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/SAP/" class="print-no-link">#SAP</a>
+      
+        <a href="/tags/ABAP/" class="print-no-link">#ABAP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SMARTFORMS</div>
+      <div>http://example.com/2023/07/29/SMARTFORMS/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>unrpyc</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/29/SELECT_SCREEN/" title="选择屏幕">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">选择屏幕</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/29/FUNCTION_ALV/" title="FUNCTION ALV的设置与使用">
+                        <span class="hidden-mobile">FUNCTION ALV的设置与使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
