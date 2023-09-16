@@ -1,0 +1,689 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/unrpyc/img/fluid.png">
+  <link rel="icon" href="/unrpyc/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="unrpyc">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="RF常用开发函数消息提示&#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;message 1234567CALL METHOD &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;message  EXPORTING   iv_flg_continue_flow &#x3D; &amp;#x27;X&amp;#x27;   iv_msgid       &#x3D; pv_msgid   iv_msgty       &#x3D; pv_msg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RF常用开发函数">
+<meta property="og:url" content="https://yan-cam.github.io/unrpyc/2023/09/16/RF%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="RF常用开发函数消息提示&#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;message 1234567CALL METHOD &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;message  EXPORTING   iv_flg_continue_flow &#x3D; &amp;#x27;X&amp;#x27;   iv_msgid       &#x3D; pv_msgid   iv_msgty       &#x3D; pv_msg">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230916213937282.png">
+<meta property="article:published_time" content="2023-09-16T13:22:00.000Z">
+<meta property="article:modified_time" content="2023-09-16T13:39:55.706Z">
+<meta property="article:author" content="unrpyc">
+<meta property="article:tag" content="SAP">
+<meta property="article:tag" content="ABAP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230916213937282.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>RF常用开发函数 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/unrpyc/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/unrpyc/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/unrpyc/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yan-cam.github.io","root":"/unrpyc/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/unrpyc/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/unrpyc/js/utils.js" ></script>
+  <script  src="/unrpyc/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/unrpyc/">
+      <strong>UNRPYC的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/unrpyc/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="RF常用开发函数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-16 21:22" pubdate>
+          2023年9月16日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">RF常用开发函数</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="RF常用开发函数"><a href="#RF常用开发函数" class="headerlink" title="RF常用开发函数"></a>RF常用开发函数</h1><h2 id="消息提示"><a href="#消息提示" class="headerlink" title="消息提示"></a>消息提示</h2><p><code>/scwm/cl_rf_bll_srvc=&gt;message</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">CALL METHOD /scwm/cl_rf_bll_srvc=&gt;message<br>  EXPORTING<br>   iv_flg_continue_flow = &#x27;X&#x27;<br>   iv_msgid       = pv_msgid<br>   iv_msgty       = pv_msgty<br>   iv_msgno       = pv_msgno<br>   iv_msgv1       = pv_msgv1.<br></code></pre></td></tr></table></figure>
+
+<h2 id="获取库存"><a href="#获取库存" class="headerlink" title="获取库存"></a>获取库存</h2><p><code>/SCWM/HU_SELECT_GEN</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">CALL FUNCTION &#x27;/SCWM/HUMAIN_REFRESH&#x27; .<br>  CALL FUNCTION &#x27;/SCWM/HU_SELECT_GEN&#x27;<br>   EXPORTING<br>    iv_lgnum   = gs_rsrc-lgnum<br>    ir_lgpla   = VALUE rseloption( ( sign = &#x27;I&#x27; option = &#x27;EQ&#x27; low = ps_rf010-lgpla ) )<br>   IMPORTING<br>    et_huhdr   = lt_huhdr<br>    et_huitm   = lt_huitm<br>   EXCEPTIONS<br>    wrong_input = 1<br>    not_possible = 2<br>    error    = 3<br>    OTHERS    = 4.<br>  IF sy-subrc &lt;&gt; 0.<br><br>\* Implement suitable error handling here<br><br> ENDIF.<br>     IF lt_huhdr IS INITIAL.<br>    CLEAR ps_rf005_9001.<br>    /scwm/cl_rf_bll_srvc=&gt;set_field(&#x27;ZEWMS_RF005_9001-HUIDENT&#x27;) .<br>    MESSAGE e004(zyc) WITH &#x27;HU不存在，请重新输入&#x27;.<br>  ENDIF.<br>  LOOP AT lt_huhdr INTO ls_huhdr.<br>    LOOP AT lt_huitm INTO ls_huitm WHERE guid_parent = ls_huhdr-guid_hu.<br>      ps_rf005_r_9002-huident = ls_huhdr-huident.<br>      ps_rf005_r_9002-lgpla = ls_huhdr-lgpla.<br>      ps_rf005_r_9002-lgtyp = ls_huhdr-lgtyp.<br>      ps_rf005_r_9002-lgnum = ls_huhdr-lgnum.<br>      ps_rf005_r_9002-matid = ls_huitm-matid.<br>      ps_rf005_r_9002-meins = ls_huitm-meins.<br>      ps_rf005_r_9002-qty = ls_huitm-quan.<br>      CALL FUNCTION &#x27;CONVERSION_EXIT_MDLPD_OUTPUT&#x27;<br>        EXPORTING<br>          input  = ls_huitm-matid<br>        IMPORTING<br>          output = ps_rf005_r_9002-matnr.<br>      SELECT SINGLE b~maktx INTO ps_rf005_r_9002-maktx FROM  /sapapo/mattxt AS b<br>             INNER JOIN /sapapo/matkey AS a ON a~matid = b~matid<br>             WHERE a~matnr = ps_rf005_r_9002-matnr.<br>      APPEND ps_rf005_r_9002 TO pt_rf005_r_9002.<br>      CLEAR:ps_rf005_r_9002.<br>    ENDLOOP.<br>  ENDLOOP.<br></code></pre></td></tr></table></figure>
+
+<h2 id="物料号转换"><a href="#物料号转换" class="headerlink" title="物料号转换"></a>物料号转换</h2><p><code>CONVERSION_EXIT_MDLPD_OUTPUT</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">CALL FUNCTION &#x27;CONVERSION_EXIT_MDLPD_OUTPUT&#x27;<br>    EXPORTING<br>     input = ls_huitm-matid<br>    IMPORTING<br>     output = ps_rf010-matnr.<br></code></pre></td></tr></table></figure>
+
+<h2 id="储位移动"><a href="#储位移动" class="headerlink" title="储位移动"></a>储位移动</h2><p><code>/SCWM/TO_CREATE_MOVE_HU</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">   lt_create_hu = VALUE #( FOR ls_rf006_9002 IN pt_rf006_9002 ( huident = ls_rf006_9002-huident procty = &#x27;9999&#x27; squit = &#x27;X&#x27; nlpla = ps_rf006_9002_target-nlpla ) ). .<br>    CALL FUNCTION &#x27;/SCWM/TO_INIT_NEW&#x27;<br>     EXPORTING<br>      iv_lgnum = gs_rsrc-lgnum.<br>    TRY.<br>      CALL FUNCTION &#x27;/SCWM/TO_CREATE_MOVE_HU&#x27;<br>       EXPORTING<br>        iv_lgnum    = gs_rsrc-lgnum<br>        iv_update_task = &#x27; &#x27;<br>        iv_commit_work = &#x27;X&#x27;<br>        iv_wtcode   = wmegc_wtcode_adhoc_hu<br>        it_create_hu  = lt_create_hu<br>       IMPORTING<br>        et_bapiret   = lv_bapiret<br>        ev_severity  = lv_severity<br>       EXCEPTIONS<br>        error_message = 1.<br> CATCH /scwm/cx_core INTO DATA(lo_error).<br>  ROLLBACK WORK.<br>  lv_message = lo_error-&gt;get_text( ).<br>  lv_severity = &#x27;E&#x27;.<br>  APPEND VALUE #( type = &#x27;E&#x27; message = lv_message ) TO lv_bapiret.<br>  /scwm/cl_tm=&gt;cleanup( ).<br>  PERFORM disp_message USING &#x27;zmsg_rfsl&#x27; &#x27;E&#x27; &#x27;000&#x27; lv_message.<br>ENDTRY.<br>   PERFORM disp_message USING &#x27;zmsg_rfsl&#x27; &#x27;E&#x27; &#x27;000&#x27; &#x27;移动至目标储位成功！&#x27;.<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/unrpyc/categories/ABAP/" class="category-chain-item">ABAP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/unrpyc/tags/SAP/" class="print-no-link">#SAP</a>
+      
+        <a href="/unrpyc/tags/ABAP/" class="print-no-link">#ABAP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>RF常用开发函数</div>
+      <div>https://yan-cam.github.io/unrpyc/2023/09/16/RF开发常用函数/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>unrpyc</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/unrpyc/2023/09/16/DIALOG%E7%A8%8B%E5%BA%8F%EF%BC%88MOUDLE%20POOL%E7%A8%8B%E5%BA%8F%EF%BC%89/" title="Online程序（M类型）DIALOG程序">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Online程序（M类型）DIALOG程序</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/unrpyc/2023/09/16/%E6%96%B0%E8%AF%AD%E6%B3%95/" title="新语法">
+                        <span class="hidden-mobile">新语法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/unrpyc/js/events.js" ></script>
+<script  src="/unrpyc/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/unrpyc/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/unrpyc/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/unrpyc/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

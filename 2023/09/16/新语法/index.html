@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/unrpyc/img/fluid.png">
+  <link rel="icon" href="/unrpyc/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="unrpyc">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ABAP新语法以及使用案例内联声明（Inline Declaration）适用场景：  定义变量 定义结构 定义内表 定义对象 定义指针  声明语法： 1234DATA(…)FIELD-SYMBOL(&lt;…&gt;)## 构造表达式  适用场景：  构造单值  构造结构  构造内表  构造类对象   类型：  NEW，构造类对象，即类的实例，适用于定义了构造方法的类实例化。  VALUE 赋值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新语法">
+<meta property="og:url" content="https://yan-cam.github.io/unrpyc/2023/09/16/%E6%96%B0%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ABAP新语法以及使用案例内联声明（Inline Declaration）适用场景：  定义变量 定义结构 定义内表 定义对象 定义指针  声明语法： 1234DATA(…)FIELD-SYMBOL(&lt;…&gt;)## 构造表达式  适用场景：  构造单值  构造结构  构造内表  构造类对象   类型：  NEW，构造类对象，即类的实例，适用于定义了构造方法的类实例化。  VALUE 赋值">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230916215154383.png">
+<meta property="article:published_time" content="2023-09-16T13:22:00.000Z">
+<meta property="article:modified_time" content="2023-09-16T13:52:11.935Z">
+<meta property="article:author" content="unrpyc">
+<meta property="article:tag" content="SAP">
+<meta property="article:tag" content="ABAP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230916215154383.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>新语法 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/unrpyc/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/unrpyc/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/unrpyc/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yan-cam.github.io","root":"/unrpyc/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/unrpyc/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/unrpyc/js/utils.js" ></script>
+  <script  src="/unrpyc/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/unrpyc/">
+      <strong>UNRPYC的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/unrpyc/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="新语法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-16 21:22" pubdate>
+          2023年9月16日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          24k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          202 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">新语法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="ABAP新语法以及使用案例"><a href="#ABAP新语法以及使用案例" class="headerlink" title="ABAP新语法以及使用案例"></a>ABAP新语法以及使用案例</h1><h2 id="内联声明（Inline-Declaration）"><a href="#内联声明（Inline-Declaration）" class="headerlink" title="内联声明（Inline Declaration）"></a>内联声明（Inline Declaration）</h2><p><strong>适用场景：</strong></p>
+<ul>
+<li>定义变量</li>
+<li>定义结构</li>
+<li>定义内表</li>
+<li>定义对象</li>
+<li>定义指针</li>
+</ul>
+<p><strong>声明语法：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">DATA(…)<br>FIELD-SYMBOL(&lt;…&gt;)<br><br>## 构造表达式<br></code></pre></td></tr></table></figure>
+
+<p><strong>适用场景：</strong></p>
+<ul>
+<li><p>构造单值</p>
+</li>
+<li><p>构造结构</p>
+</li>
+<li><p>构造内表</p>
+</li>
+<li><p>构造类对象</p>
+</li>
+</ul>
+<p><strong>类型：</strong></p>
+<ul>
+<li><p>NEW，构造类对象，即类的实例，适用于定义了构造方法的类实例化。</p>
+</li>
+<li><p>VALUE 赋值，根据被赋值对象的数据类型来赋值（value #(…)）；或者赋值时指定具体的数据类型（value dtype）。<br><strong>语法：</strong><br>① 结构赋值：<code>value dtype/#( [BASE dobj] comp1 = v1 comp2 = v2 … ).</code><br>② 内表赋值：<code>value dtype/#( [BASE itab] ( line1_comp1 = dobj1 line1_comp2 = dobj2 … ) ( … ) ( … ) ).</code></p>
+</li>
+<li><p>CORRESPONDING 赋值，匹配不同结构中的同名字段进行赋值，或者是依据映射表MAPPING 进行赋值。</p>
+<p>语法：</p>
+<p><code>toobj = corresponding dtype/#( [BASE dobj] fromobj MAPPING comp1 = v1 comp2 = v2 … Except compX …).</code></p>
+</li>
+</ul>
+<h2 id="FILTER-内表过滤"><a href="#FILTER-内表过滤" class="headerlink" title="FILTER 内表过滤"></a>FILTER 内表过滤</h2><h2 id="REDUCE-汇总"><a href="#REDUCE-汇总" class="headerlink" title="REDUCE 汇总"></a>REDUCE 汇总</h2><h2 id="SWITCH"><a href="#SWITCH" class="headerlink" title="SWITCH"></a>SWITCH</h2><h2 id="COND"><a href="#COND" class="headerlink" title="COND"></a>COND</h2><h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">*&amp;---------------------------------------------------------------------*<br>*&amp; Report Y_XLEVON_NEW_SYNTAX<br>*&amp;---------------------------------------------------------------------*<br>*&amp;<br>*&amp;---------------------------------------------------------------------*<br>REPORT y_xlevon_new_syntax.<br><br>****************************************************<br>*   1、内联声明  DATA(...)，FIELD-SYMBOL(...)<br>****************************************************<br>*  （1）赋值动态声明变量：系统根据所赋的值来确定变量类型及数据长度<br>DATA(gv_str) = &#x27;hello xlevon&#x27;.    &quot; C(12)<br>DATA(gv_int) = 1024.              &quot; I(4)<br>DATA(gr_container) = NEW cl_gui_custom_container( container_name = &#x27;cust_container&#x27;).   &quot; 类实例<br><br>*  （2）SELECT动态声明内表/结构/变量：组件类型与 SELECT LIST 对应一致<br>SELECT carrid, carrname FROM scarr UP TO 2 ROWS<br>INTO TABLE @DATA(gt_scarr).  &quot; 内表<br><br>SELECT SINGLE carrid, carrname FROM scarr<br>INTO @DATA(gw_scarr).        &quot; 结构<br><br>SELECT COUNT(*) FROM scarr<br>INTO @DATA(gv_count).        &quot; 变量<br><br>*  （3）LOOP动态声明结构/指针<br>LOOP AT gt_scarr INTO DATA(ls_scarr).   &quot; 工作区结构<br>  ...<br>ENDLOOP.<br>LOOP AT gt_scarr ASSIGNING FIELD-SYMBOL(&lt;fs_scarr&gt;).  &quot; 工作区指针<br>  ...<br>ENDLOOP.<br><br>*  （4）READ TABLE动态声明结构/指针<br>READ TABLE gt_scarr INTO DATA(lw_scarr) WITH KEY carrid = &#x27;AA&#x27;.   &quot; 工作区结构<br>READ TABLE gt_scarr ASSIGNING FIELD-SYMBOL(&lt;fw_scarr&gt;) WITH KEY carrid = &#x27;AA&#x27;.    &quot; 工作区指针<br><br>*  （5）调用类方法时动态声明（输出）对象<br>cl_salv_table=&gt;factory(<br>  IMPORTING<br>    r_salv_table = DATA(lr_table)   &quot; 类实例<br>  CHANGING<br>    t_table = gt_scarr[]<br>).<br><br><br>****************************************************<br>*   2、VALUE 赋值<br>****************************************************<br>TYPES: BEGIN OF ty_person,<br>         code TYPE char4,<br>         name TYPE char20,<br>       END OF ty_person,<br>       tty_person TYPE TABLE OF ty_person.<br><br>* 以下演示结构赋值及操作<br>DATA(gr_output) = cl_demo_output=&gt;new( )-&gt;next_section( |一、VALUE 赋示例| ).<br>gr_output-&gt;next_section( |1、VALUE 结构赋值| ).<br><br>*  （1）VALUE dtype/# 结构赋值<br>DATA(gw_person1) = VALUE ty_person( code = &#x27;1000&#x27; name = &#x27;XLevon&#x27; ).<br>*gr_output-&gt;write( gw_person1 ).<br><br>DATA gw_person2 TYPE ty_person.<br>gw_person2 = VALUE #( code = &#x27;2000&#x27; name = &#x27;XLevon&#x27; ).  &quot; 初始赋值<br>gr_output-&gt;write( gw_person2 ).<br><br>*  （2）使用 VALUE 赋值，默认会覆盖原有数据<br>gw_person2 = VALUE #( name = &#x27;Leo&#x27; ).                   &quot; 重新赋值，原值被清空，code变为空<br>gr_output-&gt;write( gw_person2 ).<br><br>*  （3）使用 VALUE 和 BASE 赋值<br>gw_person2 = VALUE #( BASE gw_person2 code = &#x27;2000&#x27; ).  &quot; 更新，name保留原值<br>gr_output-&gt;write( gw_person2 ).<br><br>*  （4）使用 LET 引入临时变量，只能在当前语句中使用<br>*   LET关键字可以使用在VALUE，SWITCH，COND等语句中<br>*   与 FOR 语句类似，LET 语句中定义的临时变量同样只能在当前语句中使用<br>DATA(gw_person3) = VALUE ty_person( LET<br>                                    let_name = gw_person2-name &amp;&amp; &#x27;-let&#x27;   &quot; 临时变量<br>                                    IN<br>                                    code = &#x27;3000&#x27;<br>                                    name = let_name  ).    &quot; 引用临时变量<br>gr_output-&gt;write( gw_person3 ).<br><br>* 以下演示内表赋值及操作<br>gr_output-&gt;next_section( |2、VALUE 内表赋值| ).<br><br>*  （5）VALUE 内表赋值<br>DATA: gt_person TYPE tty_person.<br>gt_person = VALUE #( ( gw_person1 ) ).              &quot; 赋值<br>gt_person = VALUE #( BASE gt_person ( gw_person2 )  &quot; 相当于在原来内表上 append line<br>                      ( code = &#x27;3000&#x27; name = &#x27;L&#x27; ) ).<br><br>*  （6）使用 VALUE 追加数据 &amp; 更新数据<br>APPEND VALUE #( code = &#x27;4000&#x27; name = &#x27;X&#x27; ) TO gt_person.  &quot; 相当于向内表追加（由VALUE构造的）结构<br>MODIFY gt_person FROM VALUE #( name = &#x27;XLevon&#x27; )          &quot; 相当于从（由VALUE构造的）结构更新内表<br>      TRANSPORTING name WHERE name EQ &#x27;X&#x27;.                &quot; 限定更新字段name及更新条件<br>gr_output-&gt;write( gt_person ).<br><br>*  （7）FOR 循环：从其他内表中批量引入数据<br>TYPES: BEGIN OF ty_person_for,<br>         index TYPE int4.<br>         INCLUDE TYPE ty_person.<br>TYPES: END OF ty_person_for,<br>tty_person_for TYPE TABLE OF ty_person_for WITH EMPTY KEY. &quot; 或者：WITH DEFAULT KEY<br><br>DATA(gt_person_xlevon_with_index) =<br>  VALUE tty_person_for(       &quot;备注：定义的表类型需要 WITH KEY<br>    FOR lw_ps IN gt_person    &quot; 临时变量，遍历行工作区<br>    INDEX INTO lv_i           &quot; 临时变量，当前遍历行<br>    WHERE ( name = &#x27;XLevon&#x27; ) &quot; 备注：此处必须有小括号<br>    (<br>      index = CONV #( lv_i )  &quot; 引用行号<br>      code = lw_ps-code       &quot; 引用工作区<br>      name = lw_ps-name<br>    )<br>  ).<br>gr_output-&gt;write( gt_person_xlevon_with_index ).<br><br>DATA(gt_person_xlevon_corresspond) =<br>  VALUE tty_person_for(        &quot;备注：定义的表类型需要有 WITH KEY<br>    FOR lw_ps IN gt_person<br>    WHERE ( name = &#x27;XLevon&#x27; )<br>    ( CORRESPONDING #( lw_ps ) ) &quot; 部分字段匹配赋值，未匹配的保持为空<br>  ).<br>gr_output-&gt;write( gt_person_xlevon_corresspond ).<br><br>DATA(gt_person_for_then_def) = VALUE tty_person_for(<br>  FOR i = 1 WHILE i &lt; lines( gt_person )   &quot; 默认：then i + 1<br>  (<br>    index = i    &quot; 当前FOR循环的i<br>    code = gt_person[ i ]-code<br>    name = gt_person[ i ]-name<br>  )<br>).<br>gr_output-&gt;write( gt_person_for_then_def ).<br><br>DATA(gt_person_for_then_2) = VALUE tty_person_for(<br>  FOR i = 1 THEN i + 2 WHILE i &lt; lines( gt_person )<br>  ( CORRESPONDING #( gt_person[ i ] ) )<br>).<br>gr_output-&gt;write( gt_person_for_then_2 ).<br><br><br>* 以下演示内表读取及操作<br>gr_output-&gt;next_section( |3、内表读取| ).<br>*  （8）读取内表<br>TRY.<br>    DATA(gw_person_index) = gt_person[ 1 ].           &quot; Index：从1开始，超出会dump<br>    gr_output-&gt;write( gw_person_index ).<br>  CATCH cx_sy_itab_line_not_found INTO DATA(cx).<br>*    gr_output-&gt;write( cx-&gt;get_text( ) ).<br>ENDTRY.<br><br>&quot; 取出符合件的第一条记录，取不到则为空值<br>DATA(gw_person_name) = VALUE #( gt_person[ name = &#x27;XLevon&#x27; ] OPTIONAL ).<br>gr_output-&gt;write( gw_person_name ).<br><br>* 读取不到时赋默认值<br>DATA(gw_ps_def) = VALUE ty_person( code = &#x27;0000&#x27; name = &#x27;I am XLevon&#x27; )..<br>DATA(gw_person_def) = VALUE #( gt_person[ code = &#x27;11&#x27; ] DEFAULT gw_ps_def ).<br>gr_output-&gt;write( gw_person_def ).<br><br>*gr_output-&gt;display( ).<br><br>****************************************************<br>*   3、CORRESPONDING 赋值<br>* 语法：CORRESPONDING dtype/#( [BASE ( base )] struct|itab [mapping] )<br>****************************************************<br>*  结构赋值语句，CORRESPONDING语句允许控制组件映射关系。<br>*  在ABAP 7.40之前，主要通过 MOVE-CORRESPONDING 来传递结构化数据，<br>*  但需要保持结构内部组件名称一致，否则数据将不会被传递，<br>*  而使用 CORRESPONDING 后，该语句在保持同名组件自动进行数据传递的基础上，<br>*  MAPPING 可以允许我们将不同名称的组件映射到一起，<br>*  EXCEPT 可以规避掉我们不需要传值的一些字段<br><br>*gr_output = cl_demo_output=&gt;new( )-&gt;next_section( |二、CORRESPONDING 使用示例| ).<br>gr_output-&gt;next_section( |二、CORRESPONDING 使用示例| ).<br>gr_output-&gt;next_section( |1、CORRESPONDING 结构赋值| ).<br><br>TYPES:BEGIN OF ty_person2,<br>        code TYPE char4,<br>        name TYPE char10,<br>        age  TYPE i,<br>      END OF ty_person2.<br><br>DATA(ls_p1) = VALUE ty_person( code = &#x27;1000&#x27; name = &#x27;XLevon&#x27; ).<br>DATA(ls_p2) = VALUE ty_person2( code = &#x27;2000&#x27; name = &#x27;Leo&#x27; age = 16 ).<br>gr_output-&gt;write( ls_p1 ).<br>gr_output-&gt;write( ls_p2 ).<br><br>ls_p2 = CORRESPONDING #( ls_p1 ).   &quot; 此时 ls_p2-age = 0 在赋值过程中被覆盖<br>gr_output-&gt;write( ls_p2 ).<br><br>ls_p2  =  VALUE ty_person2( code = &#x27;2000&#x27; name = &#x27;Leo&#x27; age = 16 ).<br>ls_p2 = CORRESPONDING #( BASE ( ls_p2 ) ls_p1 ).   &quot;此时 ls_p2-age = 16 未被覆盖<br>gr_output-&gt;write( ls_p2 ).<br><br>ls_p2  =  VALUE ty_person2( code = &#x27;2000&#x27; name = &#x27;Leo&#x27; age = 16 ).<br>DATA(ls_p3) = CORRESPONDING ty_person2( BASE ( ls_p2 ) ls_p1 ).  &quot; 同上<br>gr_output-&gt;write( ls_p3 ).<br><br>gr_output-&gt;next_section( |2、CORRESPONDING MAPPING 结构赋值| ).<br><br>DATA:BEGIN OF customer_crm,<br>       code TYPE char10 VALUE &#x27;1000001000&#x27;,<br>       name TYPE char35 VALUE &#x27;XLevon&#x27;,<br>       BEGIN OF information,<br>         company_code       TYPE char4 VALUE &#x27;1000&#x27;,<br>         sales_organization TYPE char4 VALUE &#x27;1010&#x27;,<br>         country            TYPE char3 VALUE &#x27;CN&#x27;,<br>       END OF information,<br>     END OF customer_crm,<br><br>     BEGIN OF customer_sap,<br>       kunnr TYPE kna1-kunnr,<br>       name1 TYPE kna1-name1,<br>       BEGIN OF info,<br>         bukrs TYPE knb1-bukrs,<br>         vkorg TYPE knvv-vkorg,<br>         land1 TYPE kna1-land1,<br>       END OF info,<br>     END OF customer_sap.<br><br>&quot;两个名字不相同的工作区相互赋值<br>customer_sap = CORRESPONDING #(<br>  customer_crm<br>  MAPPING kunnr = code name1 = name<br>    (<br>      info = information<br>      MAPPING<br>      bukrs = company_code<br>      vkorg = sales_organization<br>      land1 = country<br>    )<br>  ).<br>gr_output = gr_output-&gt;write( customer_crm ).<br>gr_output = gr_output-&gt;write( customer_sap ).<br><br>gr_output-&gt;next_section( |3、CORRESPONDING 嵌套表赋值| ).<br>*在 MAPPING 语句中，需要注意两边的字段类型，以免类型不兼容而导致程序 dump。<br>* 使用DEEP处理深层结构数据，相当于MOVE CORRESPONDING [ EXPANDING NESTED TABLES ]。<br>* 使用BASE保留初始数据，<br>* 为结构赋值时类似于 VALUE [ BASE ]，<br>* 为内表赋值时相当于 MOVE CORRESPONDING [ KEEPING TARGET LINES ]<br><br>DATA: BEGIN OF gs_emps,<br>        dept      TYPE char10,<br>        t_persons TYPE TABLE OF ty_person,<br>        count     TYPE i VALUE 0,<br>      END OF gs_emps,<br>      gt_emps LIKE TABLE OF gs_emps.<br><br>TYPES: BEGIN OF ty_sales,<br>         code       TYPE char4,<br>         sales_name TYPE char20,    &quot; 字段名不同，需要mapping<br>       END OF ty_sales.<br><br>DATA: BEGIN OF gs_sales,<br>        dept      TYPE char10,<br>        t_persons TYPE TABLE OF ty_sales,<br>        count     TYPE i VALUE 0,<br>      END OF gs_sales,<br>      gt_sales   LIKE TABLE OF gs_sales,<br>      gt_sales_b LIKE TABLE OF gs_sales.<br><br>gt_person = VALUE #( ( code = &#x27;1000&#x27; name = &#x27;XLevon&#x27; ) ( code = &#x27;2000&#x27; name = &#x27;Leo&#x27; ) ).<br><br>gs_sales = VALUE #( dept = &#x27;SALES-A&#x27; count = 2<br>                    t_persons = CORRESPONDING #( gt_person MAPPING sales_name = name ) ).<br>gs_emps = CORRESPONDING #( gs_sales<br>                          MAPPING ( t_persons = t_persons MAPPING name = sales_name )<br>                          EXCEPT dept ).    &quot; 结构赋值<br>gr_output = gr_output-&gt;write( gs_sales ).   &quot; mapping<br>gr_output = gr_output-&gt;write( gs_emps ).    &quot; except dept<br><br>gt_sales = VALUE #( ( gs_sales ) ).<br>gt_emps = CORRESPONDING #( gt_sales<br>                          MAPPING ( t_persons = t_persons MAPPING name = sales_name ) ).  &quot; 内表赋值<br><br>gt_sales_b = VALUE #( ( dept = &#x27;DEPT-B&#x27; count = 1<br>                        t_persons = VALUE #( ( code = &#x27;3000&#x27; sales_name = &#x27;L&#x27; ) ) ) ).<br>gt_emps = CORRESPONDING #(  BASE ( gt_emps )      &quot; 保留原有数据<br>                            gt_sales_b            &quot; 追加新数据<br>                            MAPPING ( t_persons = t_persons MAPPING name = sales_name )<br>                            EXCEPT dept ).  &quot; 内表赋值<br>gr_output = gr_output-&gt;write( gt_sales ).<br>gr_output = gr_output-&gt;write( gt_emps ).   &quot; except dept<br><br>gr_output-&gt;next_section( |4、CORRESPONDING 内表更新| ).<br>*CORRESPONDING中可以从两个内表中引入数据，FORM子句后的内表结构需要定义为排序表或哈希表<br>* 该语法不能与DEEP/BASE关键字同时使用，但是可以使用MAPPING/EXCEPT<br>* 如下例所示，以表1为基表，根据USING定义的关联条件去表2查找数据，如果查找到，<br>* 则将表2的该条数据复写到表1对应的记录上并返回，否则直接返回表1的数据<br>* MAPPING/EXCEPT作用于表2数据复写到表1对应记录的过程中，特定条件下可以用来实现读取数据<br>* 并更新内表的操作，但是需要定义非标准表，有一定的局限性<br><br>TYPES:BEGIN OF ty_data_a,<br>        index TYPE i,<br>        text1 TYPE char1,<br>        text2 TYPE char1,<br>        text3 TYPE char1,<br>      END OF ty_data_a,<br>      BEGIN OF ty_data_b,<br>        id    TYPE i,<br>        text1 TYPE char1,<br>        text2 TYPE char1,<br>        char3 TYPE char1,<br>      END OF ty_data_b.<br><br>DATA: lt_tmp1            TYPE SORTED TABLE OF ty_data_a WITH UNIQUE KEY index,<br>      &quot;TYPE STANDARD TABLE OF ty_data_a WITH EMPTY KEY,<br>      lt_tmp2            TYPE SORTED TABLE OF ty_data_b WITH UNIQUE KEY id,     &quot; TYPE HASHED TABLE<br>      lt_data            TYPE TABLE OF ty_data_a,<br>      lt_data_map_except TYPE TABLE OF ty_data_a.<br><br>lt_tmp1 = VALUE #( FOR i = 1 UNTIL i &gt; 4 ( index = i text1 = &#x27;L&#x27; ) ).   &quot; 默认 THEN i + 1<br>lt_tmp2 = VALUE #( text2 = &#x27;E&#x27; char3 = &#x27;O&#x27; ( id = 2 ) ( id = 3 ) ).<br><br>&quot;按照using后条件对应，from后表的数据传递给前表<br>lt_data = CORRESPONDING #( lt_tmp1 FROM lt_tmp2 USING id = index ).<br>&quot;可以使用mapping和except<br>lt_data_map_except = CORRESPONDING #( lt_tmp1 FROM lt_tmp2 USING id = index<br>                                      MAPPING text3 = char3 EXCEPT text1 ).<br><br>gr_output = gr_output-&gt;write( lt_tmp1 ).<br>gr_output = gr_output-&gt;write( lt_tmp2 ).<br>gr_output = gr_output-&gt;write( lt_data ).<br>gr_output = gr_output-&gt;write( lt_data_map_except ).<br><br>*gr_output-&gt;display( ).<br><br><br>****************************************************<br>*   4、内表筛选 Filter<br>****************************************************<br>gr_output-&gt;next_section( |三、Filter 使用示例| ).<br>gr_output-&gt;next_section( |1、排序表赋值（自动排序）| ).<br><br>*定义数据类型<br>*TYPES tty_person2 TYPE TABLE OF ty_person WITH DEFAULT KEY.<br><br>*  初始化内表<br>&quot; 需要是排序表或者哈希表<br>TYPES: ty_sorted_tab TYPE SORTED TABLE OF ty_person WITH NON-UNIQUE KEY code.<br><br>DATA(gt_person_sorted) = VALUE ty_sorted_tab(<br>                                ( code = &#x27;1000&#x27; name = &#x27;XLevon1&#x27; )<br>                                ( code = &#x27;3000&#x27; name = &#x27;XLevon3&#x27; )<br>                                ( code = &#x27;2000&#x27; name = &#x27;XLevon2&#x27; ) ).<br>gr_output-&gt;write( gt_person_sorted ).   &quot; 输出时已经排序<br><br>*  直接Filter WHERE code = &#x27;1000&#x27;<br>DATA(gt_person_1000) = FILTER #( gt_person_sorted WHERE code = &#x27;1000&#x27; ).<br>gr_output-&gt;next_section( |1.1、直接 WHERE code = &#x27;1000&#x27;| )-&gt;write( gt_person_1000 ).<br><br>*  使用except语句 EXCEPT WHERE code = &#x27;1000&#x27;<br>DATA(gt_person_except_1000) = FILTER #( gt_person_sorted EXCEPT WHERE code = &#x27;1000&#x27;).<br>gr_output-&gt;next_section( |1.2、使用 EXCEPT WHERE code = &#x27;1000&#x27;| )-&gt;write( gt_person_except_1000 ).<br><br>*  标准表赋值<br>TYPES: ty_std_tab TYPE STANDARD TABLE OF ty_person<br>             WITH NON-UNIQUE SORTED KEY cod COMPONENTS code.<br>DATA gt_person_std TYPE ty_std_tab.<br>gt_person_std  = VALUE #(<br>                    ( code = &#x27;1000&#x27; name = &#x27;XLevon1&#x27; )<br>                    ( code = &#x27;3000&#x27; name = &#x27;XLevon3&#x27; )<br>                    ( code = &#x27;2000&#x27; name = &#x27;XLevon2&#x27; ) ).<br>gr_output-&gt;next_section( |2、标准表赋值（无排序）| )-&gt;write( gt_person_std ).<br><br>*  标准表filter USING KEY cod WHERE code = &#x27;01&#x27;<br>DATA(gt_person2_1000) = FILTER #( gt_person_std USING KEY cod WHERE code = &#x27;1000&#x27;).<br>gr_output-&gt;next_section( |2.1、标准表 USING KEY| )-&gt;write( gt_person2_1000 ).<br><br>*  标准表except语句 EXCEPT USING KEY cod  WHERE code = &#x27;01&#x27;<br>DATA(gt_person2_except_1000) = FILTER #( gt_person_std EXCEPT USING KEY cod  WHERE code = &#x27;1000&#x27;).<br>gr_output-&gt;next_section( |2.2、标准表 EXCEPT USING KEY| )-&gt;write( gt_person2_except_1000 ).<br><br>*  使用多个值筛选<br>DATA it_codes TYPE SORTED TABLE OF ty_person-code WITH NON-UNIQUE KEY table_line.<br>it_codes = VALUE #( ( &#x27;1000&#x27; ) ( &#x27;3000&#x27; ) ).<br>DATA(gt_person_cond) = FILTER #( gt_person_std IN it_codes WHERE code = table_line ).<br>gr_output-&gt;next_section( |3.1、使用单个关键字多个值筛选 IN| )-&gt;write( gt_person_cond ).<br><br>DATA(gt_person_exept_cond) = FILTER #( gt_person_std EXCEPT IN it_codes WHERE code = table_line ).<br>gr_output-&gt;next_section( |3.2、使用单个关键字多个值筛选 EXCEPT IN| )-&gt;write( gt_person_exept_cond ).<br><br>*  使用多个关键字筛选<br>TYPES: ty_filter_tab TYPE HASHED TABLE OF ty_person WITH UNIQUE KEY code name.<br>DATA(lt_filter) = VALUE ty_filter_tab(<br>                      ( code = &#x27;1000&#x27; name  =&#x27;XLevon1&#x27; )<br>                      ( code = &#x27;3000&#x27; name = &#x27;XLevon3&#x27; )  ).<br>gr_output-&gt;next_section( |4、使用多个关键字的行记录筛选| )-&gt;write( lt_filter ).<br><br>DATA(gt_person2_cond) = FILTER #( gt_person_std IN lt_filter<br>                              WHERE code = code AND name = name ).<br>gr_output-&gt;next_section( |4.1、使用多个关键字的行记录筛选 IN| )-&gt;write( gt_person2_cond ).<br><br>*    排除<br>DATA(gt_person2_except_cond) = FILTER #( gt_person_std EXCEPT IN lt_filter<br>                              WHERE code = code AND name = name ).<br>gr_output-&gt;next_section( |4.2、使用多个关键字的行记录筛选 EXCEPT IN| )-&gt;write( gt_person2_except_cond ).<br><br>*  显示数据<br>*gr_output-&gt;display( ).<br><br><br>****************************************************<br>*   5、Reduce 汇总求和 （ ≥ NW 7.40）<br>****************************************************<br>gr_output-&gt;next_section( |四、REDUCE 使用示例| ).<br><br>*  数字汇总<br>DATA(lv_sum) = REDUCE i( INIT s = 0 FOR  i = 1 UNTIL i &gt; 10 NEXT s += i ).<br>gr_output-&gt;next_section( |1、简单汇总| )-&gt;write( lv_sum ).<br><br>*   字符串连接<br>DATA(lv_str) = REDUCE string( INIT st = |数字连接:|<br>                           FOR i = 10 THEN i - 1 UNTIL i = 0  &quot; 或者： while i &gt; 0<br>                           NEXT st = st &amp;&amp; |&#123; i &#125;| ).<br>gr_output-&gt;next_section( |2、字符串连接| )-&gt;write( lv_str ).<br><br>*   内表汇总<br>TYPES: tty_30 TYPE TABLE OF i WITH EMPTY KEY.<br>DATA(itab31) = VALUE tty_30( FOR j = 1 WHILE j &lt;= 10 ( j ) ).<br>DATA(it_sum) = REDUCE i( INIT x = 0 FOR ls_tab IN itab31 NEXT x = x + ls_tab ).<br>gr_output-&gt;next_section( |3、内表| )-&gt;write( itab31 ).<br>gr_output-&gt;next_section( |4、内表汇总| )-&gt;write( it_sum ).<br><br>*  复杂汇总<br>TYPES:BEGIN OF ty_031,<br>        code  TYPE char2,<br>        group TYPE char1,<br>        quan  TYPE i,<br>      END OF ty_031.<br>DATA itab32 TYPE TABLE OF ty_031<br>      WITH NON-UNIQUE SORTED KEY grp COMPONENTS group       &quot; 按照group汇总时需要<br>      WITH NON-UNIQUE SORTED KEY cod COMPONENTS code group. &quot; 按照code和group汇总时需要<br><br>itab32 = VALUE #( ( code = &#x27;1&#x27; group = &#x27;A&#x27; quan = 1 )<br>                  ( code = &#x27;1&#x27; group = &#x27;A&#x27; quan = 3 )<br>                  ( code = &#x27;3&#x27; group = &#x27;A&#x27; quan = 2 )<br>                  ( code = &#x27;2&#x27; group = &#x27;C&#x27; quan = 4 )<br>                  ( code = &#x27;2&#x27; group = &#x27;A&#x27; quan = 5 )<br>                  ( code = &#x27;3&#x27; group = &#x27;B&#x27; quan = 8 )<br>                  ( code = &#x27;3&#x27; group = &#x27;A&#x27; quan = 4 )<br>                  ( code = &#x27;1&#x27; group = &#x27;C&#x27; quan = 2 ) ).<br>gr_output-&gt;next_section( |5、复杂汇总-示例表| )-&gt;write( itab32 ).<br><br>*  按照group汇总<br>DATA itabg TYPE TABLE OF ty_031.<br>LOOP AT itab32 INTO DATA(ls_itab32).<br>  DATA(lscheck) = VALUE #( itabg[ group = ls_itab32-group ] OPTIONAL ).<br>  IF lscheck IS NOT INITIAL.<br>    CONTINUE.<br>  ENDIF.<br><br>  DATA(ls_itabg) = ls_itab32.<br>  CLEAR:ls_itabg-code.<br>  ls_itabg-quan = REDUCE i(<br>    INIT sum = 0<br>    FOR ls IN FILTER #( itab32 USING KEY grp WHERE group = ls_itabg-group )<br>    NEXT sum += ls-quan ).<br>  APPEND ls_itabg TO itabg.<br>ENDLOOP.<br>gr_output-&gt;next_section( |5.1、按照group汇总| )-&gt;write( itabg ).<br><br>*  按照 code 和 group 汇总<br>DATA itabcg TYPE TABLE OF ty_031.<br>CLEAR: lscheck, ls_itabg.<br>LOOP AT itab32 INTO ls_itab32.<br>  lscheck = VALUE #( itabcg[ code = ls_itab32-code group = ls_itab32-group ] OPTIONAL ).<br>  IF lscheck IS NOT INITIAL.<br>    CONTINUE.<br>  ENDIF.<br><br>  ls_itabg = ls_itab32.<br>  ls_itabg-quan = REDUCE i(<br>    INIT sum = 0<br>    FOR ls IN FILTER #( itab32 USING KEY cod WHERE code = ls_itabg-code AND group = ls_itabg-group )<br>    NEXT sum += ls-quan ).<br>  APPEND ls_itabg TO itabcg.<br>ENDLOOP.<br>gr_output-&gt;next_section( |5.2、按照 code 和 group 汇总| )-&gt;write( itabcg ).<br><br>*  显示数据<br>*gr_output-&gt;display( ).<br><br>****************************************************<br>*   6、SWITCH、COND 赋值<br>****************************************************<br>gr_output-&gt;next_section( |五、SWITCH、COND 赋值| ).<br>gr_output-&gt;next_section( |1、SWITCH 赋值| ).<br><br>* 1）SWITCH<br>*  SWITCH动态赋值语句，通常根据同一变量的不同数据来动态处理，用法类似于 CASE 语句。<br>DATA(number) = SWITCH string( sy-index<br>                              WHEN 1 THEN &#x27;one&#x27;<br>                              WHEN 2 THEN &#x27;two&#x27;<br>                              WHEN 3 THEN &#x27;three&#x27;<br>                              ELSE &#x27;unkown&#x27; ).  &quot;THROW cx_overflow( ) ).<br>gr_output-&gt;write( number ).<br><br>DATA(lv_indicator) = 1.<br>DATA(lv_day1) = SWITCH char10( lv_indicator<br>                              WHEN 1 THEN &#x27;MONDAY&#x27;<br>                              WHEN 2 THEN &#x27;TUESDAY&#x27;<br>                              WHEN 3 THEN &#x27;WEDNESDAY&#x27;<br>                              WHEN 4 THEN &#x27;THURSDAY&#x27;<br>                              WHEN 5 THEN &#x27;FRIDAY&#x27;<br>                              WHEN 6 THEN &#x27;SATURDAY&#x27;<br>                              WHEN 7 THEN &#x27;SUNDAY&#x27;<br>                              ELSE &#x27;404&#x27; &amp;&amp; &#x27;-ERROR&#x27;<br>                             ).<br>gr_output-&gt;write( lv_day1 ).<br><br>* 23）COND<br>*COND动态赋值语句，可以根据不同条件来动态处理，用法类似于CASE/IF语句。<br>*COND语句中允许使用较为复杂的判断条件，因此VALUE语句中动态赋值通常会使用COND。<br>lv_indicator = 7.<br>DATA(lv_day7) = COND char10( WHEN lv_indicator = 1 THEN &#x27;MONDAY&#x27;<br>                            WHEN lv_indicator = 2 THEN &#x27;TUESDAY&#x27;<br>                            WHEN lv_indicator = 3 THEN &#x27;WEDNESDAY&#x27;<br>                            WHEN lv_indicator = 4 THEN &#x27;THURSDAY&#x27;<br>                            WHEN lv_indicator = 5 THEN &#x27;FRIDAY&#x27;<br>                            WHEN lv_indicator = 6 THEN &#x27;SATURDAY&#x27;<br>                            WHEN lv_indicator = 7 AND sy-langu EQ &#x27;E&#x27; THEN &#x27;SUNDAY&#x27;<br>                            WHEN lv_indicator = 7 AND sy-langu EQ &#x27;F&#x27; THEN &#x27;DIMANCHE&#x27;<br>                            WHEN lv_indicator = 7 AND sy-langu EQ &#x27;1&#x27; THEN &#x27;星期天&#x27;<br>                            ELSE &#x27;404&#x27; &amp;&amp; &#x27;-ERROR&#x27;<br>                           ).<br>gr_output-&gt;next_section( |2、COND 赋值| )-&gt;write( lv_day7 ).<br><br>*gr_output-&gt;display( ).<br><br>****************************************************<br>*   7、其他<br>****************************************************<br>* 1）前导零处理<br>DATA:lv_matnr1 TYPE matnr VALUE &#x27;X999&#x27;,<br>     lv_matnr2 TYPE matnr VALUE &#x27;999&#x27;,<br>     lv_matnr6 TYPE matnr,<br>     lv_matnr7 TYPE matnr.<br><br>* Width/Alignment/Padding 宽度/对齐/填充<br>&quot;按指定宽度（18）位置（RIGHT）填充指定字符（0），不管是否含非数字<br>DATA(lv_matnr3) = |&#123; lv_matnr1  WIDTH = 18 ALIGN = RIGHT PAD = &#x27;0&#x27; &#125;|.<br>DATA(lv_matnr4) = |&#123; lv_matnr1 ALPHA = IN &#125;|.           &quot;含有非数字，不补前导0<br>&quot;不有非数字，补前导0至40位，物料标准转换例程为补前导0至18位，故这个方法不适合物料补前导0<br>DATA(lv_matnr5) = |&#123; lv_matnr2 ALPHA = IN &#125;|.<br><br>&quot;物料标准转换例程，含有非数字，不做转换<br>CALL FUNCTION &#x27;CONVERSION_EXIT_MATN1_INPUT&#x27;<br>  EXPORTING<br>    input        = lv_matnr1<br>  IMPORTING<br>    output       = lv_matnr6<br>  EXCEPTIONS<br>    length_error = 1<br>    OTHERS       = 2.<br>IF sy-subrc &lt;&gt; 0.<br>* Implement suitable error handling here<br>ENDIF.<br><br>&quot;物料标准转换例程，不含非数字，则补前导0至18位<br>CALL FUNCTION &#x27;CONVERSION_EXIT_MATN1_INPUT&#x27;<br>  EXPORTING<br>    input        = lv_matnr2<br>  IMPORTING<br>    output       = lv_matnr7<br>  EXCEPTIONS<br>    length_error = 1<br>    OTHERS       = 2.<br>IF sy-subrc &lt;&gt; 0.<br>* Implement suitable error handling here<br>ENDIF.<br><br>DATA(lv_matnr8) = |&#123; lv_matnr7 ALPHA = OUT &#125;|.<br>DATA(lv_matnr9) = lv_matnr7.<br>SHIFT lv_matnr9 LEFT DELETING LEADING &#x27;0&#x27;.  &quot;去前导0<br><br>WRITE / : &#x27;非纯数字物料号：lv_matnr1:&#x27; &amp;&amp; lv_matnr1 ,<br>          &#x27;纯数字物料号：lv_matnr2:&#x27; &amp;&amp; lv_matnr2 ,<br>          &#x27;WIDTH ALIGN PAD lv_matnr3:&#x27; &amp;&amp; lv_matnr3 ,<br>          &#x27;ALPHA = IN lv_matnr4:&#x27; &amp;&amp; lv_matnr4 ,<br>          &#x27;ALPHA = IN lv_matnr5:&#x27; &amp;&amp; lv_matnr5 ,<br>          &#x27;CONVERSION_EXIT_MATN1_INPUT lv_matnr6:&#x27; &amp;&amp; lv_matnr6 ,<br>          &#x27;CONVERSION_EXIT_MATN1_INPUT lv_matnr7:&#x27; &amp;&amp; lv_matnr7 ,<br>          &#x27;ALPHA = OUT lv_matnr8:&#x27; &amp;&amp; lv_matnr8 ,<br>          &#x27;SHIFT LEFT DELETING LEADING lv_matnr9:&#x27; &amp;&amp; lv_matnr9 .<br><br>* 2） 日期格式<br>WRITE / : ,<br>|ISO日期：&#123; sy-datum DATE = ISO &#125;|,                &quot;Date Format YYYY-MM-DD<br>|USER日期：&#123; sy-datum DATE = USER &#125;|,              &quot;As per user settings<br>|ENVIRONMENT日期：&#123; sy-datum DATE = ENVIRONMENT &#125;|.&quot;Formatting setting of language environment<br><br>* 3）字符串内表拼接<br>TYPES: BEGIN OF ty_test,<br>         code TYPE char4,<br>         name TYPE char10,<br>       END OF ty_test,<br>       tty_test TYPE TABLE OF ty_test.<br>DATA: gt_test  TYPE tty_test,<br>      lt_split LIKE gt_test.<br>gt_test = VALUE #( ( code = &#x27;10&#x27; name = &#x27;Leo&#x27; )<br>                   ( code = &#x27;20&#x27; name = &#x27;XLevon&#x27; )<br>                   ( code = &#x27;30&#x27; name = &#x27;Leo&#x27; )<br>                   ( code = &#x27;40&#x27; name = &#x27;XLevon&#x27; ) ).<br><br>DATA(lv_concat_lines) = concat_lines_of( table = gt_test  sep = &#x27;/&#x27; ).  &quot; 内表拼接为字符串<br>SPLIT lv_concat_lines AT &#x27;/&#x27; INTO TABLE lt_split.    &quot; 字符串拆分成内表<br><br>WRITE / : ,&#x27;concat_lines_of：&#x27;&amp;&amp; lv_concat_lines.<br>LOOP AT lt_split ASSIGNING FIELD-SYMBOL(&lt;fs_split&gt;).<br>  WRITE / : &#x27;SPLIT-&#x27; &amp;&amp; sy-tabix &amp;&amp; &#x27;：&#x27; &amp;&amp; &lt;fs_split&gt;-code &amp;&amp; &#x27;：&#x27;&amp;&amp; &lt;fs_split&gt;-name.<br>ENDLOOP.<br><br>* 4）LINES、LINE_INDEX、LINE_EXISTS<br>*  LINES 计算内表总行数。<br>*  LINE_EXISTS 判断根据特定条件能否在内表中读取到记录，返回值为布尔型数据。使用此语法，可判断内表中行是否有满足条件的，无需LOOP判断，省去好多代码。<br>*  LINE_INDEX 获取内表中满足特定条件的记录所在的行数( INDEX ),如果存在多个条件值，则只会返回第一个搜索到的值的行数。<br>DATA(lv_lines) = lines( gt_test ).<br>DATA(lv_index) = line_index( gt_test[ code = &#x27;20&#x27; name = &#x27;XLevon&#x27; ] ).<br>DATA(lv_exist) = xsdbool( line_exists( gt_test[ code = &#x27;20&#x27; name = &#x27;XLevon&#x27; ] ) ).<br>IF line_exists( gt_test[ code = &#x27;20&#x27; name = &#x27;XLevon&#x27; ] ).<br>  DATA(ls_data) = gt_test[ code = &#x27;20&#x27; name = &#x27;XLevon&#x27; ]. &quot;取该行数据<br>  WRITE / : ,&#x27;从&#x27; &amp;&amp; lv_lines &amp;&amp; &#x27;条记录中找到第&#x27; &amp;&amp; lv_index &amp;&amp; &#x27;条数据为：&#x27;, ls_data.<br>ENDIF.<br><br>* 5）||、&#123;&#125;、&amp;&amp;的使用<br>*  || 里面内容除&#123;&#125;内的原样输出，包括空格；<br>*  || 里面可以使用&#123;&#125;引入ABAP代码<br>WRITE / : , |有空格: &#123; gt_test[ name = &#x27;XLevon&#x27; ]-code &#125;| ,   &quot; 空格会保留<br>&#x27;没空格: &#x27;&amp;&amp; gt_test[ name = &#x27;XLevon&#x27; ]-code  .   &quot; 空格被忽略<br><br>* 6）REPLACE<br>*  如果occ为正，则从左边开始计数;如果occ为负，则从右数。<br>*   值1、2、....表示第一，第二，事件。取值为-1、-2、....表示最后一个，倒数第二个，。<br>DATA(lv_string1) = &#x27;XLevon&#x27;.<br>DATA(lv_string2) = &#x27;Leo&#x27;..<br>DATA(lv_string3) = replace(   val = lv_string1<br>                               sub = &#x27;Lev&#x27;<br>                               case = abap_true<br>                               with = to_upper( lv_string2 ) &quot;如果发现sta,用lv_string2的大写替换<br>                               occ = 1   &quot;val中只有1处为sub<br>                            ).<br>WRITE / : , &#x27;替换后的字符串：&#x27; &amp;&amp;  lv_string3.<br><br>* 7）CASE TYPE OF dobj<br>TRY.<br>    DATA(lv_value) = 10 / 0.<br>    WRITE: / , &#x27;10 / 0，触发错误：&#x27;.<br>  CATCH cx_root INTO DATA(exc).<br>    CASE TYPE OF exc.<br>      WHEN TYPE cx_sy_arithmetic_error.<br>        WRITE: &#x27;Arithmetic error&#x27; .<br>      WHEN TYPE cx_sy_conversion_error.<br>        WRITE:  &#x27;Conversion error&#x27; .<br>      WHEN OTHERS.<br>        WRITE:  &#x27;Other error&#x27; .<br>    ENDCASE.<br>ENDTRY.<br><br>* 8）GROUP BY分组循环<br>*  分组处理，不像at end of 那样需要调整字段顺序<br>gr_output-&gt;next_section( |六、其他| )-&gt;next_section( |1、GROUP BY分组| ).<br><br>DATA lt_groupby_name LIKE gt_test.<br>LOOP AT gt_test INTO DATA(ls_test)<br>  GROUP BY ( name = ls_test-name )<br>  ASCENDING INTO DATA(lt_group).<br>  &quot;组内循环<br>  LOOP AT GROUP lt_group INTO DATA(ls_group).<br>    APPEND ls_group TO lt_groupby_name.<br>  ENDLOOP.<br>  gr_output-&gt;write( lt_groupby_name ).<br>  CLEAR lt_groupby_name[].<br>ENDLOOP.<br><br>* 9）GROUP BY SWITCH 动态条件分组。<br>gr_output-&gt;next_section( |2、GROUP BY SWITCH 动态条件分组| ).<br><br>SELECT<br>  code, name,<br>  CASE WHEN code IN (&#x27;10&#x27;, &#x27;20&#x27;) THEN &#x27;A&#x27; ELSE &#x27;B&#x27; END AS group<br>  FROM @gt_test AS t<br>  INTO TABLE @DATA(gt_group).<br><br>DATA lt_groupby_switch LIKE gt_group.<br>DATA: lv_switch_field TYPE c VALUE &#x27;B&#x27;.<br>LOOP AT gt_group ASSIGNING FIELD-SYMBOL(&lt;fs_group&gt;)<br>  GROUP BY SWITCH string( lv_switch_field<br>      WHEN &#x27;A&#x27; THEN |name = &#123; &lt;fs_group&gt;-name &#125;|<br>      WHEN &#x27;B&#x27; THEN |group = &#123; &lt;fs_group&gt;-group &#125;| )<br>*  GROUP BY ( group = &lt;fs_group&gt;-group )    &quot; 等同<br>    ASSIGNING FIELD-SYMBOL(&lt;ls_group&gt;).<br>  LOOP AT GROUP &lt;ls_group&gt; ASSIGNING FIELD-SYMBOL(&lt;fs1&gt;).<br>    APPEND &lt;fs1&gt; TO lt_groupby_switch.<br>  ENDLOOP.<br>  gr_output-&gt;write( lt_groupby_switch ).<br>  CLEAR lt_groupby_switch[].<br>ENDLOOP.<br><br></code></pre></td></tr></table></figure>
+
+<p>————————————————<br>版权声明：本文为CSDN博主「X档案库」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/XLevon/article/details/129232646">https://blog.csdn.net/XLevon/article/details/129232646</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/unrpyc/categories/ABAP/" class="category-chain-item">ABAP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/unrpyc/tags/SAP/" class="print-no-link">#SAP</a>
+      
+        <a href="/unrpyc/tags/ABAP/" class="print-no-link">#ABAP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>新语法</div>
+      <div>https://yan-cam.github.io/unrpyc/2023/09/16/新语法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>unrpyc</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/unrpyc/2023/09/16/RF%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" title="RF常用开发函数">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RF常用开发函数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/unrpyc/2023/08/29/SMARTFORMS/" title="SMARTFORMS">
+                        <span class="hidden-mobile">SMARTFORMS</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/unrpyc/js/events.js" ></script>
+<script  src="/unrpyc/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/unrpyc/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/unrpyc/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/unrpyc/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
