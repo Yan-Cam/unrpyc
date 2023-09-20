@@ -16,16 +16,16 @@
   <meta name="author" content="unrpyc">
   <meta name="keywords" content="">
   
-    <meta name="description" content="RF常用开发函数消息提示&#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;message 1234567CALL METHOD &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;message  EXPORTING   iv_flg_continue_flow &#x3D; &amp;#x27;X&amp;#x27;   iv_msgid       &#x3D; pv_msgid   iv_msgty       &#x3D; pv_msg">
+    <meta name="description" content="RF常用开发函数设置屏幕参数 &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;init_screen_param( ). 12345\* 设置屏幕参数 &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;set_screen_param(&amp;#x27;ZGS_RF007_9001&amp;#x27;). &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;set_screen_param(&amp;#x27;ZGS_">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RF常用开发函数">
-<meta property="og:url" content="https://yan-cam.github.io/unrpyc/2023/09/16/RF%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:url" content="https://yan-cam.github.io/unrpyc/2023/09/20/RF%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="RF常用开发函数消息提示&#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;message 1234567CALL METHOD &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;message  EXPORTING   iv_flg_continue_flow &#x3D; &amp;#x27;X&amp;#x27;   iv_msgid       &#x3D; pv_msgid   iv_msgty       &#x3D; pv_msg">
+<meta property="og:description" content="RF常用开发函数设置屏幕参数 &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;init_screen_param( ). 12345\* 设置屏幕参数 &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;set_screen_param(&amp;#x27;ZGS_RF007_9001&amp;#x27;). &#x2F;scwm&#x2F;cl_rf_bll_srvc&#x3D;&gt;set_screen_param(&amp;#x27;ZGS_">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20230916213937282.png">
-<meta property="article:published_time" content="2023-09-16T13:22:00.000Z">
-<meta property="article:modified_time" content="2023-09-16T13:39:55.706Z">
+<meta property="article:published_time" content="2023-09-20T13:22:00.000Z">
+<meta property="article:modified_time" content="2023-09-20T14:12:53.392Z">
 <meta property="article:author" content="unrpyc">
 <meta property="article:tag" content="SAP">
 <meta property="article:tag" content="ABAP">
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-16 21:22" pubdate>
-          2023年9月16日 晚上
+        <time datetime="2023-09-20 21:22" pubdate>
+          2023年9月20日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          6.1k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          22 分钟
+          51 分钟
         
       </span>
     
@@ -278,10 +278,21 @@
             
               <div class="markdown-body">
                 
-                <h1 id="RF常用开发函数"><a href="#RF常用开发函数" class="headerlink" title="RF常用开发函数"></a>RF常用开发函数</h1><h2 id="消息提示"><a href="#消息提示" class="headerlink" title="消息提示"></a>消息提示</h2><p><code>/scwm/cl_rf_bll_srvc=&gt;message</code></p>
+                <h1 id="RF常用开发函数"><a href="#RF常用开发函数" class="headerlink" title="RF常用开发函数"></a>RF常用开发函数</h1><h2 id="设置屏幕参数"><a href="#设置屏幕参数" class="headerlink" title="设置屏幕参数"></a>设置屏幕参数</h2><p> <code>/scwm/cl_rf_bll_srvc=&gt;init_screen_param( ).</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">\* 设置屏幕参数<br> /scwm/cl_rf_bll_srvc=&gt;set_screen_param(&#x27;ZGS_RF007_9001&#x27;).<br> /scwm/cl_rf_bll_srvc=&gt;set_screen_param(&#x27;ZGS_RF007_9002&#x27;).<br> /scwm/cl_rf_bll_srvc=&gt;set_screen_param(&#x27;ZGT_RF007_9002&#x27;).<br> /scwm/cl_rf_bll_srvc=&gt;set_screen_param(&#x27;ZGS_RF007_9003&#x27;).<br></code></pre></td></tr></table></figure>
+<h2 id="设置表数据容器"><a href="#设置表数据容器" class="headerlink" title="设置表数据容器"></a>设置表数据容器</h2><p>  <code>/scwm/cl_rf_bll_srvc=&gt;set_scr_tabname(&#39;&#39;).</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ABAP"> \* 为屏幕设置表数据容器<br>/scwm/cl_rf_bll_srvc=&gt;set_scr_tabname(&#x27;ZGT_RF007_9002&#x27;).<br></code></pre></td></tr></table></figure>
+
+<h2 id="获取用户资源"><a href="#获取用户资源" class="headerlink" title="获取用户资源"></a>获取用户资源</h2><p><code>/SCWM/RSRC_RESOURCE_MEMORY</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">\* RF全局資源<br>  CLEAR: gs_rsrc.<br> \* 获得用户资源<br>  CALL FUNCTION &#x27;/SCWM/RSRC_RESOURCE_MEMORY&#x27;<br>   EXPORTING<br>    iv_uname = sy-uname<br>   CHANGING<br>    cs_rsrc = gs_rsrc.<br></code></pre></td></tr></table></figure>
+
+<h2 id="设置仓库号"><a href="#设置仓库号" class="headerlink" title="设置仓库号"></a>设置仓库号</h2><p><code>/scwm/cl_tm=&gt;set_lgnum( gs_rsrc-lgnum ).</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">\* 设置仓库号<br>  CALL METHOD /scwm/cl_tm=&gt;set_lgnum( gs_rsrc-lgnum ).<br> /scwm/cl_rf_bll_srvc=&gt;set_line( 1 ).<br></code></pre></td></tr></table></figure>
+
+<h2 id="消息提示"><a href="#消息提示" class="headerlink" title="消息提示"></a>消息提示</h2><p><code>/scwm/cl_rf_bll_srvc=&gt;message</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">CALL METHOD /scwm/cl_rf_bll_srvc=&gt;message<br>  EXPORTING<br>   iv_flg_continue_flow = &#x27;X&#x27;<br>   iv_msgid       = pv_msgid<br>   iv_msgty       = pv_msgty<br>   iv_msgno       = pv_msgno<br>   iv_msgv1       = pv_msgv1.<br></code></pre></td></tr></table></figure>
 
-<h2 id="获取库存"><a href="#获取库存" class="headerlink" title="获取库存"></a>获取库存</h2><p><code>/SCWM/HU_SELECT_GEN</code></p>
+<h2 id="按HU获取库存"><a href="#按HU获取库存" class="headerlink" title="按HU获取库存"></a>按HU获取库存</h2><p><code>/SCWM/HU_SELECT_GEN</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">CALL FUNCTION &#x27;/SCWM/HUMAIN_REFRESH&#x27; .<br>  CALL FUNCTION &#x27;/SCWM/HU_SELECT_GEN&#x27;<br>   EXPORTING<br>    iv_lgnum   = gs_rsrc-lgnum<br>    ir_lgpla   = VALUE rseloption( ( sign = &#x27;I&#x27; option = &#x27;EQ&#x27; low = ps_rf010-lgpla ) )<br>   IMPORTING<br>    et_huhdr   = lt_huhdr<br>    et_huitm   = lt_huitm<br>   EXCEPTIONS<br>    wrong_input = 1<br>    not_possible = 2<br>    error    = 3<br>    OTHERS    = 4.<br>  IF sy-subrc &lt;&gt; 0.<br><br>\* Implement suitable error handling here<br><br> ENDIF.<br>     IF lt_huhdr IS INITIAL.<br>    CLEAR ps_rf005_9001.<br>    /scwm/cl_rf_bll_srvc=&gt;set_field(&#x27;ZEWMS_RF005_9001-HUIDENT&#x27;) .<br>    MESSAGE e004(zyc) WITH &#x27;HU不存在，请重新输入&#x27;.<br>  ENDIF.<br>  LOOP AT lt_huhdr INTO ls_huhdr.<br>    LOOP AT lt_huitm INTO ls_huitm WHERE guid_parent = ls_huhdr-guid_hu.<br>      ps_rf005_r_9002-huident = ls_huhdr-huident.<br>      ps_rf005_r_9002-lgpla = ls_huhdr-lgpla.<br>      ps_rf005_r_9002-lgtyp = ls_huhdr-lgtyp.<br>      ps_rf005_r_9002-lgnum = ls_huhdr-lgnum.<br>      ps_rf005_r_9002-matid = ls_huitm-matid.<br>      ps_rf005_r_9002-meins = ls_huitm-meins.<br>      ps_rf005_r_9002-qty = ls_huitm-quan.<br>      CALL FUNCTION &#x27;CONVERSION_EXIT_MDLPD_OUTPUT&#x27;<br>        EXPORTING<br>          input  = ls_huitm-matid<br>        IMPORTING<br>          output = ps_rf005_r_9002-matnr.<br>      SELECT SINGLE b~maktx INTO ps_rf005_r_9002-maktx FROM  /sapapo/mattxt AS b<br>             INNER JOIN /sapapo/matkey AS a ON a~matid = b~matid<br>             WHERE a~matnr = ps_rf005_r_9002-matnr.<br>      APPEND ps_rf005_r_9002 TO pt_rf005_r_9002.<br>      CLEAR:ps_rf005_r_9002.<br>    ENDLOOP.<br>  ENDLOOP.<br></code></pre></td></tr></table></figure>
 
 <h2 id="物料号转换"><a href="#物料号转换" class="headerlink" title="物料号转换"></a>物料号转换</h2><p><code>CONVERSION_EXIT_MDLPD_OUTPUT</code></p>
@@ -289,6 +300,20 @@
 
 <h2 id="储位移动"><a href="#储位移动" class="headerlink" title="储位移动"></a>储位移动</h2><p><code>/SCWM/TO_CREATE_MOVE_HU</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">   lt_create_hu = VALUE #( FOR ls_rf006_9002 IN pt_rf006_9002 ( huident = ls_rf006_9002-huident procty = &#x27;9999&#x27; squit = &#x27;X&#x27; nlpla = ps_rf006_9002_target-nlpla ) ). .<br>    CALL FUNCTION &#x27;/SCWM/TO_INIT_NEW&#x27;<br>     EXPORTING<br>      iv_lgnum = gs_rsrc-lgnum.<br>    TRY.<br>      CALL FUNCTION &#x27;/SCWM/TO_CREATE_MOVE_HU&#x27;<br>       EXPORTING<br>        iv_lgnum    = gs_rsrc-lgnum<br>        iv_update_task = &#x27; &#x27;<br>        iv_commit_work = &#x27;X&#x27;<br>        iv_wtcode   = wmegc_wtcode_adhoc_hu<br>        it_create_hu  = lt_create_hu<br>       IMPORTING<br>        et_bapiret   = lv_bapiret<br>        ev_severity  = lv_severity<br>       EXCEPTIONS<br>        error_message = 1.<br> CATCH /scwm/cx_core INTO DATA(lo_error).<br>  ROLLBACK WORK.<br>  lv_message = lo_error-&gt;get_text( ).<br>  lv_severity = &#x27;E&#x27;.<br>  APPEND VALUE #( type = &#x27;E&#x27; message = lv_message ) TO lv_bapiret.<br>  /scwm/cl_tm=&gt;cleanup( ).<br>  PERFORM disp_message USING &#x27;zmsg_rfsl&#x27; &#x27;E&#x27; &#x27;000&#x27; lv_message.<br>ENDTRY.<br>   PERFORM disp_message USING &#x27;zmsg_rfsl&#x27; &#x27;E&#x27; &#x27;000&#x27; &#x27;移动至目标储位成功！&#x27;.<br></code></pre></td></tr></table></figure>
+
+<h2 id="代码控制屏幕跳转"><a href="#代码控制屏幕跳转" class="headerlink" title="代码控制屏幕跳转"></a>代码控制屏幕跳转</h2><p><code> /scwm/cl_rf_bll_srvc=&gt;set_prmod( /scwm/cl_rf_bll_srvc=&gt;c_prmod_background )</code></p>
+<p><code>/scwm/cl_rf_bll_srvc=&gt;set_fcode()</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ABAP"> /scwm/cl_rf_bll_srvc=&gt;set_prmod( /scwm/cl_rf_bll_srvc=&gt;c_prmod_background ) .<br>/scwm/cl_rf_bll_srvc=&gt;set_fcode( &#x27;ZJUMP2&#x27; ).<br></code></pre></td></tr></table></figure>
+
+<h2 id="创建上架务WPT默认取HU对应交货单行项目的WPT"><a href="#创建上架务WPT默认取HU对应交货单行项目的WPT" class="headerlink" title="创建上架务WPT默认取HU对应交货单行项目的WPT"></a>创建上架务WPT默认取HU对应交货单行项目的WPT</h2><p><code>/SCWM/TO_CREATE_WHR</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">lt_crea_hu = VALUE #( ( guid_hu = ls_huhdr-guid_hu procty = &#x27;Y041&#x27; squit = &#x27;&#x27; ) ).<br> CALL FUNCTION &#x27;/SCWM/TO_WHR_INIT&#x27;.<br> CALL FUNCTION &#x27;/SCWM/TO_CREATE_WHR&#x27;<br>  EXPORTING<br>   iv_lgnum    = gs_rsrc-lgnum<br>   iv_process   = &#x27;1&#x27;<br>   iv_mve_hu   = &#x27;X&#x27;<br>   iv_mve_mat   = &#x27;X&#x27;<br>   iv_mve_hu_mult = &#x27;X&#x27;<br>   iv_to_init   = &#x27;X&#x27;<br>   iv_bname    = sy-uname<br>   it_crea_hu   = lt_crea_hu<br>   iv_update_task = &#x27; &#x27;<br>   iv_commit_work = &#x27;X&#x27;<br>  IMPORTING<br>   ev_tanum    = gv_tanum<br>   et_ltap_vb   = lt_ltap_vb<br>   et_bapiret   = lt_bapiret<br>   ev_severity  = lv_severity.<br><br> DELETE ADJACENT DUPLICATES FROM lt_bapiret COMPARING ALL FIELDS.<br> LOOP AT lt_bapiret INTO DATA(ls_bapiret) WHERE type CA &#x27;AEX&#x27;.<br>  lv_error = abap_true.<br>  IF lv_message IS INITIAL.<br>   lv_message = ls_bapiret-message.<br>  ELSE.<br>   CONCATENATE lv_message ls_bapiret-message INTO lv_message SEPARATED BY space.<br>  ENDIF.<br> ENDLOOP.<br></code></pre></td></tr></table></figure>
+
+<h2 id="获取HU上架任务"><a href="#获取HU上架任务" class="headerlink" title="获取HU上架任务"></a>获取HU上架任务</h2><p> <code>/SCWM/TO_READ_INIT’&amp; CALL_FUNCTION/SCWM/TO_READ_HU</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">CALL FUNCTION &#x27;/SCWM/TO_READ_INIT&#x27;.<br> CALL FUNCTION &#x27;/SCWM/TO_READ_HU&#x27;<br>  EXPORTING<br>   iv_lgnum    = gs_rsrc-lgnum<br>   it_huident   = VALUE /scwm/tt_huident( ( lgnum = gs_rsrc-lgnum huident = ps_rf007_9001-huident ) )<br>  IMPORTING<br>   et_ordim_o_src = lt_ordim_o_src<br>   et_ordim_o_des = lt_ordim_o_des<br>  EXCEPTIONS<br>   error     = 1<br>   OTHERS     = 2.<br> IF sy-subrc &lt;&gt; 0.<br>\* Implement suitable error handling here<br> ENDIF.<br> IF lt_ordim_o_src IS NOT INITIAL AND lt_ordim_o_des IS NOT INITIAL.<br>  MESSAGE e004(zyc) WITH &#x27;该HU &#x27; &amp;&amp; ls_huhdr-huident &amp;&amp; &#x27;已上架&#x27;.<br> ENDIF.<br></code></pre></td></tr></table></figure>
+
+<h2 id="上架任务确认"><a href="#上架任务确认" class="headerlink" title="上架任务确认"></a>上架任务确认</h2><p><code>/SCWM/TO_CONFIRM</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">CALL FUNCTION &#x27;/SCWM/TO_INIT_NEW&#x27;<br> EXPORTING<br>  iv_lgnum    = gs_rsrc-lgnum.<br>CALL FUNCTION &#x27;/SCWM/TO_CONFIRM&#x27;<br> EXPORTING<br>  iv_lgnum        = gs_rsrc-lgnum<br>  IV_SUBST        = space<br>  IV_QNAME        = SY-UNAME<br>  IV_CRETO        = space<br>  IV_WTCODE       = space<br>  IV_UPDATE_TASK     = space<br>  IV_COMMIT_WORK     = &#x27;X&#x27;<br>  IV_PROCESSOR_DET    = space<br>  it_conf        = lt_conf<br>  IT_CONF_EXC      = lt_conf_exc<br> IMPORTING<br>  ET_LTAP_VB       = lt_ltap_vb<br>  ET_BAPIRET       = lt_bapiret<br>  EV_SEVERITY      = lv_severity<br>  EV_SER_ERR       = lv_ser_err.<br>IF lv_severity CA &#x27;AEX&#x27;.<br>LOOP AT lt_bapiret INTO DATA(ls_bapiret).<br> MESSAGE ID ls_bapiret-id TYPE ls_bapiret-type<br> NUMBER ls_bapiret-number<br> WITH ls_bapiret-message_v1 &amp;&amp; ls_bapiret-message_v2 &amp;&amp; ls_bapiret-message_v3 &amp;&amp; ls_bapiret-message_v4 INTO DATA(lv_message).<br> lv_messages = lv_messages &amp;&amp; lv_message.<br>ENDLOOP.<br> MESSAGE e004(zyc) WITH lv_message.<br>ELSE.<br> PERFORM disp_message USING &#x27;zmsg_rfsl&#x27; &#x27;S&#x27; &#x27;000&#x27; &#x27;打包成功！&#x27;.<br>ENDIF.<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -337,7 +362,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>RF常用开发函数</div>
-      <div>https://yan-cam.github.io/unrpyc/2023/09/16/RF开发常用函数/</div>
+      <div>https://yan-cam.github.io/unrpyc/2023/09/20/RF开发常用函数/</div>
     </div>
     <div class="license-meta">
       
@@ -349,7 +374,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月16日</div>
+          <div>2023年9月20日</div>
         </div>
       
       
@@ -381,18 +406,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/unrpyc/2023/09/16/DIALOG%E7%A8%8B%E5%BA%8F%EF%BC%88MOUDLE%20POOL%E7%A8%8B%E5%BA%8F%EF%BC%89/" title="Online程序（M类型）DIALOG程序">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Online程序（M类型）DIALOG程序</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/unrpyc/2023/09/16/%E6%96%B0%E8%AF%AD%E6%B3%95/" title="新语法">
-                        <span class="hidden-mobile">新语法</span>
+                      <a href="/unrpyc/2023/09/17/RF%E5%BC%80%E5%8F%91/" title="EWM RF手持设备开发">
+                        <span class="hidden-mobile">EWM RF手持设备开发</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
