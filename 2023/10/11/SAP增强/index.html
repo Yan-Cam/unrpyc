@@ -1,0 +1,805 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/unrpyc/img/fluid.png">
+  <link rel="icon" href="/unrpyc/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="unrpyc">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="SAP增强 针对SAP标准功能的扩展  基于SAP源代码的增强 对SAP所预留的空的子过程进行编码，用户可以编辑此子过程，并在这个子过程中添加自定义的代码，以增加SAP标准程序的控制功能  第一代出口-User exit如何查找增强点（代码搜索查找）——以SD用户出口为例 SD及MM较多的程序都是基于源码控制来实现增强的 开发类：VMOD 出口程序：include中  查找方法 进入SPRO事务，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SAP增强">
+<meta property="og:url" content="https://yan-cam.github.io/unrpyc/2023/10/11/SAP%E5%A2%9E%E5%BC%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SAP增强 针对SAP标准功能的扩展  基于SAP源代码的增强 对SAP所预留的空的子过程进行编码，用户可以编辑此子过程，并在这个子过程中添加自定义的代码，以增加SAP标准程序的控制功能  第一代出口-User exit如何查找增强点（代码搜索查找）——以SD用户出口为例 SD及MM较多的程序都是基于源码控制来实现增强的 开发类：VMOD 出口程序：include中  查找方法 进入SPRO事务，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011221039645.png">
+<meta property="article:published_time" content="2023-10-11T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-11T16:14:08.477Z">
+<meta property="article:author" content="unrpyc">
+<meta property="article:tag" content="SAP">
+<meta property="article:tag" content="ABAP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011221039645.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>SAP增强 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/unrpyc/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/unrpyc/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/unrpyc/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yan-cam.github.io","root":"/unrpyc/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/unrpyc/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/unrpyc/js/utils.js" ></script>
+  <script  src="/unrpyc/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/unrpyc/">
+      <strong>UNRPYC的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/unrpyc/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/unrpyc/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SAP增强"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-11 23:00" pubdate>
+          2023年10月11日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">SAP增强</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="SAP增强"><a href="#SAP增强" class="headerlink" title="SAP增强"></a>SAP增强</h1><blockquote>
+<p>针对SAP标准功能的扩展</p>
+</blockquote>
+<h2 id="基于SAP源代码的增强"><a href="#基于SAP源代码的增强" class="headerlink" title="基于SAP源代码的增强"></a>基于SAP源代码的增强</h2><blockquote>
+<p>对SAP所预留的空的子过程进行编码，用户可以编辑此子过程，并在这个子过程中添加自定义的代码，以增加SAP标准程序的控制功能</p>
+</blockquote>
+<h3 id="第一代出口-User-exit"><a href="#第一代出口-User-exit" class="headerlink" title="第一代出口-User exit"></a>第一代出口-User exit</h3><h4 id="如何查找增强点（代码搜索查找）——以SD用户出口为例"><a href="#如何查找增强点（代码搜索查找）——以SD用户出口为例" class="headerlink" title="如何查找增强点（代码搜索查找）——以SD用户出口为例"></a>如何查找增强点（代码搜索查找）——以SD用户出口为例</h4><ul>
+<li>SD及MM较多的程序都是基于源码控制来实现增强的</li>
+<li>开发类：<code>VMOD</code></li>
+<li>出口程序：<code>include</code>中</li>
+</ul>
+<h4 id="查找方法"><a href="#查找方法" class="headerlink" title="查找方法"></a>查找方法</h4><ol>
+<li>进入<code>SPRO</code>事务，点击绿色标记区域</li>
+<li>依次点开绿色标记区域找到需要修改的条目，并查看实施指南活动文档</li>
+<li>通过英文文档的描述找出对应出口</li>
+<li>进入<code>SE80</code>事务，找到此前对应出口的包含文件，并在红色标记区域进行增强代码插入操作</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011221039645.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第一代查找步骤一"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011221649988.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第一代查找步骤二"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011222258073.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第一代查找步骤三"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011222829418.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第一代查找步骤四"></p>
+<p>视频演示流程地址：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Fu411u7pa/">SAP增强——第一种用户出口（源代码） (bilibili.com)</a></p>
+<p><strong>注意：需要申请access key才能更改的，相当于修改了SAP的标准程序，而且系统更新后增强会被覆盖</strong></p>
+<h2 id="基于函数的增强"><a href="#基于函数的增强" class="headerlink" title="基于函数的增强"></a>基于函数的增强</h2><blockquote>
+<p>SAP为此类出口提供了相应的函数，依据函数结构指定的传入&#x2F;传出参数，程序执行时，调用该函数并检查相应的代码</p>
+</blockquote>
+<h3 id="第二代出口-Customer-Exit"><a href="#第二代出口-Customer-Exit" class="headerlink" title="第二代出口-Customer Exit"></a>第二代出口-Customer Exit</h3><p>出口对象（是否激活）—— 函数（表：<code>MODSAP</code>）</p>
+<ul>
+<li><p><code>NAME</code>：出口对象的名称</p>
+</li>
+<li><p><code>TYPE</code>：出口对象的类型（E：功能退出&#x2F;S：屏幕&#x2F;T：表&#x2F;C：GUI代码）</p>
+</li>
+<li><p><code>MEMBER</code>：函数</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011225052427.png" srcset="/unrpyc/img/loading.gif" lazyload alt="出口对象图示"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011225309171.png" srcset="/unrpyc/img/loading.gif" lazyload alt="MODSAP表图示"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011225831968.png" srcset="/unrpyc/img/loading.gif" lazyload alt="MODSAP表数据图示"></p>
+<p>查看出口对象（T-code：<code>SMOD</code>）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011230117879.png" srcset="/unrpyc/img/loading.gif" lazyload alt="查看出口对象"></p>
+<h4 id="四种出口类型"><a href="#四种出口类型" class="headerlink" title="四种出口类型"></a>四种出口类型</h4><ol>
+<li>菜单出口-Menu Exits：定义自己的菜单</li>
+<li>屏幕出口-Screen Exits：定义自己的屏幕</li>
+<li>功能模块出口-Function Module Exits：SAP应用程序中添加功能</li>
+<li>关键字出口-Keyword Exits：在ABAP&#x2F;4字典中的关键字数据元素添加文档。结果是你在使用这些数据元素的字段处按F1后会出现你自定义的说明文档</li>
+</ol>
+<h4 id="如何实现增强"><a href="#如何实现增强" class="headerlink" title="如何实现增强"></a>如何实现增强</h4><ol>
+<li>创建一个项目对象（Project）事务代码：<code>CMOD</code></li>
+<li>查看组件，列出组件中函数功能，并双击需要实现的函数</li>
+<li>双击进入函数功能中的INLUDE文件</li>
+<li>编写代码</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011230916528.png" srcset="/unrpyc/img/loading.gif" lazyload alt="实现增强步骤一"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011231038517.png" srcset="/unrpyc/img/loading.gif" lazyload alt="实现增强步骤二"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011231249508.png" srcset="/unrpyc/img/loading.gif" lazyload alt="实现增强步骤三"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011231322572.png" srcset="/unrpyc/img/loading.gif" lazyload alt="实现增强步骤四"></p>
+<h4 id="如何查找增强点——以SD用户出口为例"><a href="#如何查找增强点——以SD用户出口为例" class="headerlink" title="如何查找增强点——以SD用户出口为例"></a>如何查找增强点——以SD用户出口为例</h4><ol>
+<li>查看事务代码的状态</li>
+<li>找出事务代码的主程序并双击进入（绿色标记区域处）</li>
+<li>点击绿色区域处进入全局搜索模式</li>
+<li>搜索<code>CALL CUSTOMER-FUNCTION</code></li>
+<li>对搜索结果进行翻找即可</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011223437647.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法一步骤一"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011224108973.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法一步骤二"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011224223679.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法一步骤三"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011224425559.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法一步骤四"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011224620400.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法一步骤五"></p>
+<h4 id="如何查找增强点（包查找）——-以SD用户出口为例"><a href="#如何查找增强点（包查找）——-以SD用户出口为例" class="headerlink" title="如何查找增强点（包查找）—— 以SD用户出口为例"></a>如何查找增强点（包查找）—— 以SD用户出口为例</h4><ol>
+<li>进入事务SMOD，开启加强的搜索帮助</li>
+<li>按照包名进行搜索</li>
+<li>根据相应描述选择对应的出口对象并双击</li>
+<li>根据相应描述选择对应的函数</li>
+<li>按照上文中的<strong>如何实现增强</strong>进行增强实现</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011231837741.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法二步骤一"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011232049284.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法二步骤二"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011232606514.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法二步骤三"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011232719533.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法二步骤四"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011232827002.png" srcset="/unrpyc/img/loading.gif" lazyload alt="第二代查找方法二步骤五"></p>
+<p>视频演示流程地址：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1p34y137Qw/">SAP增强——第二种用户出口（函数）_哔哩哔哩_bilibili</a></p>
+<h2 id="SAP-BAdI（基于对象）"><a href="#SAP-BAdI（基于对象）" class="headerlink" title="SAP BAdI（基于对象）"></a>SAP BAdI（基于对象）</h2><blockquote>
+<p>使用面向对象的方式实现增强</p>
+<p>BAdIs(Business Add-Ins)是SAP在R&#x2F;3 release 4.6A后增加的增强技术。总的来说，BAdIs克服了之前出口的所有缺点，并且还是用最新的OO技术实现。</p>
+</blockquote>
+<h3 id="常用事务代码"><a href="#常用事务代码" class="headerlink" title="常用事务代码"></a>常用事务代码</h3><p><code>SE18</code>：创建及维护BAdI对象</p>
+<ul>
+<li><p>创建增强点</p>
+</li>
+<li><p>维护接口&#x2F;类（<code>Interface</code>）</p>
+</li>
+<li><p>维护方法，维护方法的参数</p>
+</li>
+<li><p>维护实施<code>Implementation</code>（可以在<code>SE19</code>下面查看）</p>
+</li>
+</ul>
+<p><code>SE19</code>：维护BAdI实例，BAdI功能的实现</p>
+<h3 id="如何查找增强点（SE24）——以SD用户出口为例"><a href="#如何查找增强点（SE24）——以SD用户出口为例" class="headerlink" title="如何查找增强点（SE24）——以SD用户出口为例"></a>如何查找增强点（SE24）——以SD用户出口为例</h3><ol>
+<li>进入事务<code>SE24</code>，输入<code>CL_EXITHANDLER</code>点击显示</li>
+<li>双击进入接口<code>GET_INSTANCE</code></li>
+<li>在绿色区域标志处打上断点</li>
+<li>运行事务代码判断并在记事本上记录 的值</li>
+<li>进入事务<code>SE18</code>通过exit_name查看BAdI</li>
+<li>根据描述找到对应接口</li>
+<li>进入事务<code>SE19</code>参照BAdI创建实施</li>
+<li>进入创建好的实施并双击实现对应接口（增强点）</li>
+<li>编写代码保存后激活</li>
+<li>进入事务<code>SE18</code>检查实施是否调用</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011233510201.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤一"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011233631199.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤二"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011233858871.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤三"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011234310245.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤四"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011234755734.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤五"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011234947997.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤六"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011235215543.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤七——1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011235423808.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤七——2"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231011235714634.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤八"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231012000223689.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤九"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231012000419335.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤九"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231012000525863.png" srcset="/unrpyc/img/loading.gif" lazyload alt="通过SE24查找增强点步骤十"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231012000617825.png" srcset="/unrpyc/img/loading.gif" lazyload alt="高亮代表实施已调用"></p>
+<h3 id="如何查找增强点（ST05）——以SD用户出口为例（不推荐）"><a href="#如何查找增强点（ST05）——以SD用户出口为例（不推荐）" class="headerlink" title="如何查找增强点（ST05）——以SD用户出口为例（不推荐）"></a>如何查找增强点（ST05）——以SD用户出口为例（不推荐）</h3><ol>
+<li>打开运行事务码: <code>ST05</code> 选择“table buffer trace”</li>
+<li>activate trace（开始跟踪）</li>
+<li>运行事务码：<code>me21n</code>，创建一个采购订单，保存</li>
+<li>deactivate trace（结束跟踪）</li>
+<li>点击display trace，在出来的选择条件中： objects中输入：<code>V_EXT_IMP</code>和<code>V_EXT_ACT</code>；在 operations中输入“OPEN”</li>
+<li>查询结果：视图<code>V_EXT_IMP</code>的BAdI的接口类名字都是以<code>IF_EX_</code>开头的，其中<code>IF_EX_</code>之后的就是对应BAdI接口的定义</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231012001048773.png" srcset="/unrpyc/img/loading.gif" lazyload alt="ST05关键步骤"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Yan-Cam/blogPictureHost/image-20231012001143890.png" srcset="/unrpyc/img/loading.gif" lazyload alt="ST05关键步骤"></p>
+<p>视频演示流程地址：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1zh4y1z7Y1/">SAP增强——第三种插入方式BADI（OO对象）_哔哩哔哩_bilibili</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/unrpyc/categories/ABAP/" class="category-chain-item">ABAP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/unrpyc/tags/SAP/" class="print-no-link">#SAP</a>
+      
+        <a href="/unrpyc/tags/ABAP/" class="print-no-link">#ABAP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SAP增强</div>
+      <div>https://yan-cam.github.io/unrpyc/2023/10/11/SAP增强/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>unrpyc</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月11日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/unrpyc/2023/09/20/RF%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" title="RF常用开发函数">
+                        <span class="hidden-mobile">RF常用开发函数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/unrpyc/js/events.js" ></script>
+<script  src="/unrpyc/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/unrpyc/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/unrpyc/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/unrpyc/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
