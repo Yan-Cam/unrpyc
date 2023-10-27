@@ -16,27 +16,27 @@
   <meta name="author" content="unrpyc">
   <meta name="keywords" content="">
   
-    <meta name="description" content="RFCRFC的通信 两个独立的SAP系统之间的通信  SAP系统作为调用系统，与外部远程系统（非SAP ABAP系统）通信  外部系统作为调用系统，与SAP系统通信   RFC接口系统 ABAP程序的调用  非SAP ABAP程序的调用接口   RFC的通信模式大体上可以分为两种模式：同步和异步 同步调用的优缺点：  优点：可以及时将数据返还给发送系统  缺点：系统对话时必须保证两个系统处于活动状">
+    <meta name="description" content="RFC调用RFC的通信 两个独立的SAP系统之间的通信  SAP系统作为调用系统，与外部远程系统（非SAP ABAP系统）通信  外部系统作为调用系统，与SAP系统通信   RFC接口系统 ABAP程序的调用  非SAP ABAP程序的调用接口   RFC的通信模式大体上可以分为两种模式：同步和异步 同步调用的优缺点：  优点：可以及时将数据返还给发送系统  缺点：系统对话时必须保证两个系统处于活">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://yan-cam.github.io/unrpyc/2023/10/25/RFC%E8%B0%83%E7%94%A8/index.html">
+<meta property="og:title" content="RFC调用">
+<meta property="og:url" content="https://yan-cam.github.io/unrpyc/2023/10/27/RFC%E8%B0%83%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="RFCRFC的通信 两个独立的SAP系统之间的通信  SAP系统作为调用系统，与外部远程系统（非SAP ABAP系统）通信  外部系统作为调用系统，与SAP系统通信   RFC接口系统 ABAP程序的调用  非SAP ABAP程序的调用接口   RFC的通信模式大体上可以分为两种模式：同步和异步 同步调用的优缺点：  优点：可以及时将数据返还给发送系统  缺点：系统对话时必须保证两个系统处于活动状">
+<meta property="og:description" content="RFC调用RFC的通信 两个独立的SAP系统之间的通信  SAP系统作为调用系统，与外部远程系统（非SAP ABAP系统）通信  外部系统作为调用系统，与SAP系统通信   RFC接口系统 ABAP程序的调用  非SAP ABAP程序的调用接口   RFC的通信模式大体上可以分为两种模式：同步和异步 同步调用的优缺点：  优点：可以及时将数据返还给发送系统  缺点：系统对话时必须保证两个系统处于活">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231027212409599.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231027212454796.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231027223601855.png">
-<meta property="article:published_time" content="2023-10-25T05:43:40.815Z">
-<meta property="article:modified_time" content="2023-10-27T14:39:26.782Z">
+<meta property="article:published_time" content="2023-10-27T14:49:00.000Z">
+<meta property="article:modified_time" content="2023-10-27T14:50:19.191Z">
 <meta property="article:author" content="unrpyc">
+<meta property="article:tag" content="SAP">
+<meta property="article:tag" content="ABAP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231027212409599.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231027212454796.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Hexo</title>
+  <title>RFC调用 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="RFC调用"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-25 13:43" pubdate>
-          2023年10月25日 下午
+        <time datetime="2023-10-27 22:49" pubdate>
+          2023年10月27日 晚上
         </time>
       </span>
     
@@ -273,12 +273,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">RFC调用</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h1><h2 id="RFC的通信"><a href="#RFC的通信" class="headerlink" title="RFC的通信"></a>RFC的通信</h2><ul>
+                <h1 id="RFC调用"><a href="#RFC调用" class="headerlink" title="RFC调用"></a>RFC调用</h1><h2 id="RFC的通信"><a href="#RFC的通信" class="headerlink" title="RFC的通信"></a>RFC的通信</h2><ul>
 <li><p>两个独立的SAP系统之间的通信</p>
 </li>
 <li><p>SAP系统作为调用系统，与外部远程系统（非SAP ABAP系统）通信</p>
@@ -390,6 +390,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/unrpyc/categories/ABAP/" class="category-chain-item">ABAP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/unrpyc/tags/SAP/" class="print-no-link">#SAP</a>
+      
+        <a href="/unrpyc/tags/ABAP/" class="print-no-link">#ABAP</a>
+      
+    </div>
   
 </div>
 
@@ -399,8 +429,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>https://yan-cam.github.io/unrpyc/2023/10/25/RFC调用/</div>
+      <div>RFC调用</div>
+      <div>https://yan-cam.github.io/unrpyc/2023/10/27/RFC调用/</div>
     </div>
     <div class="license-meta">
       
@@ -412,7 +442,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月25日</div>
+          <div>2023年10月27日</div>
         </div>
       
       
@@ -444,18 +474,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/unrpyc/2023/10/26/soap%E5%8D%8F%E8%AE%AE/" title="RFC使用的SOAP协议">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RFC使用的SOAP协议</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/unrpyc/2023/10/11/SAP%E5%A2%9E%E5%BC%BA/" title="SAP增强">
-                        <span class="hidden-mobile">SAP增强</span>
+                      <a href="/unrpyc/2023/10/26/soap%E5%8D%8F%E8%AE%AE/" title="RFC使用的SOAP协议">
+                        <span class="hidden-mobile">RFC使用的SOAP协议</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
