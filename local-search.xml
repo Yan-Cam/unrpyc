@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>ADOBE FORM</title>
+    <link href="/unrpyc/2023/11/07/ADOBE_FORM/"/>
+    <url>/unrpyc/2023/11/07/ADOBE_FORM/</url>
+    
+    <content type="html"><![CDATA[<h1 id="ADOBE-FORM开发"><a href="#ADOBE-FORM开发" class="headerlink" title="ADOBE FORM开发"></a>ADOBE FORM开发</h1><h2 id="什么是Adobe-From"><a href="#什么是Adobe-From" class="headerlink" title="什么是Adobe From"></a>什么是Adobe From</h2><p>Adobe From 又称为PDF FROM 是SAP的一种最新的表单生成技术，相比较Sap Script From 与 Smartforms 其优点更加灵活方便开发。</p><p>前提条件：系统中有Adobe life cycle designer，并且在服务器中配置过ADS。</p><p><strong>注意：如果没有安装会无法打开表单设计器，如果没有配置ADS会无法调试表单</strong></p><h2 id="如何开发ADOBE-FORM"><a href="#如何开发ADOBE-FORM" class="headerlink" title="如何开发ADOBE FORM"></a>如何开发ADOBE FORM</h2><ol><li>进入事务码：<code>SFP</code></li><li>创建界面，并添加所用到的数据结构</li><li>创建表单，并指定表单界面</li><li>将界面中用到的数据结构拖入到表单中</li><li>在表单设计器里设计表单</li><li>保存激活调试即可</li></ol><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107221915236.png" alt="步骤一"></p><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107222919224.png" alt="步骤二"></p><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107223508888.png" alt="步骤三"></p><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107223649486.png" alt="步骤四"></p><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107223924875.png" alt="步骤五"></p><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107224023690.png" alt="步骤六"></p><p>调用示例代码：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs ABAP">*&amp;---------------------------------------------------------------------*<br>*&amp; Report ZADOBE_TEST<br>*&amp;---------------------------------------------------------------------*<br>*&amp;<br>*&amp;---------------------------------------------------------------------*<br>REPORT ZADOBE_TEST.<br>*定义Form的名字<br>data: lv_form_name type fpwbformname.<br>*定义得到的函数名字，这个函数就是form的接口<br>data: lv_fm_name type rs38l_fnam.<br>*定义打印参数<br>data: lwa_fp_params type SFPOUTPUTPARAMS.<br>*定义处理结果<br>data: lv_result type sfpjoboutput.<br>data: ls_header type ZHANDOVER_LIST_SCREEN_HEADER,<br>      lt_list TYPE ZTT_ADOBELIST.<br><br>START-OF-SELECTION.<br><br>*取得函数的名字<br>  lv_form_name = &#x27;ZHANDOVER_LIST&#x27;.<br>  CALL FUNCTION &#x27;FP_FUNCTION_MODULE_NAME&#x27;<br>    EXPORTING<br>      I_NAME     = lv_form_name<br>    IMPORTING<br>      E_FUNCNAME = lv_fm_name.<br><br>* 这个是RFC的名字<br>  lwa_fp_params-connection = &#x27;ADS&#x27;.<br>* 打开一个打印job<br>  CALL FUNCTION &#x27;FP_JOB_OPEN&#x27;<br>    CHANGING<br>      IE_OUTPUTPARAMS = lwa_fp_params<br>    EXCEPTIONS<br>      CANCEL          = 1<br>      USAGE_ERROR     = 2<br>      SYSTEM_ERROR    = 3<br>      INTERNAL_ERROR  = 4<br>      OTHERS          = 5.<br>  IF SY-SUBRC &lt;&gt; 0.<br>    MESSAGE ID SY-MSGID TYPE SY-MSGTY NUMBER SY-MSGNO<br>            WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4.<br>  ENDIF.<br>ls_header = VALUE #( DOCNO = &#x27;800000073&#x27; TSTFR_GI_DATE_WH = &#x27;2023/01/01&#x27; TSTTO_ACT_GI_DATE_WH = &#x27;2023/08/08&#x27; ADDRESS = &#x27;SX00001交接点1&#x27; USERNAME = &#x27;闫灿&#x27; DEPARTMENT = &#x27;制造部门&#x27; ).<br>lt_list = VALUE #( ( order = 1 makid = &#x27;C000001301&#x27; maktx = &#x27;85%H3PO4-兴福&#x27; QUANTITY = &#x27;4&#x27; UNIT = &#x27;DR&#x27; SAPBD = &#x27;2303121E23&#x27; GYSBD = &#x27;2303121V01&#x27; ) ).<br>*调用真正的form接口函数<br>  CALL FUNCTION lv_fm_name<br>    EXPORTING<br>      header = ls_header<br>      list = lt_list.<br><br>* 关闭打印job<br>  CALL FUNCTION &#x27;FP_JOB_CLOSE&#x27;<br>    IMPORTING<br>      E_RESULT       = lv_result<br>    EXCEPTIONS<br>      USAGE_ERROR    = 1<br>      SYSTEM_ERROR   = 2<br>      INTERNAL_ERROR = 3<br>      OTHERS         = 4.<br>  IF SY-SUBRC &lt;&gt; 0.<br>    MESSAGE ID SY-MSGID TYPE SY-MSGTY NUMBER SY-MSGNO<br>            WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4.<br>  ENDIF.<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>ABAP</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>SAP</tag>
+      
+      <tag>ABAP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>PI开发</title>
+    <link href="/unrpyc/2023/11/06/pi%E5%BC%80%E5%8F%91/"/>
+    <url>/unrpyc/2023/11/06/pi%E5%BC%80%E5%8F%91/</url>
+    
+    <content type="html"><![CDATA[<h1 id="PI开发"><a href="#PI开发" class="headerlink" title="PI开发"></a>PI开发</h1><h2 id="什么是PO"><a href="#什么是PO" class="headerlink" title="什么是PO"></a>什么是PO</h2><p> SAP PO是基于SAP Net weaver平台的中间件产品，为企业提供一套支持SAP系统间、SAP系统与Non-Sap系统间以及Non-SAP系统间进行数据交换和流程整合的平台，支持同步和异步的数据交互方式，帮助企业及其IT组织实现大部分集成需求，PI之后被集成到了PO之中。</p><p>这里涉及到的PO开发指的是PI开发，并不包括PO配置的部分，PO配置部分可以参考以下文章</p><p><a href="https://www.cnblogs.com/zyhcs/p/15825771.html">记录ABAP开发的日常——SAP_PO开发同步接口案例 - Gjboy666 - 博客园 (cnblogs.com)</a></p><h2 id="关于PI"><a href="#关于PI" class="headerlink" title="关于PI"></a>关于PI</h2><ul><li>搭建平台，为SAP与non SAP提供标准化的接口</li><li>可以传入也可以传出，可以同步也可以异步</li><li>如果是主动传出，一般使用PI</li><li>三方联系（SAP &lt;-&gt; PI &lt;-&gt; non SAP)</li><li>常用事务代码<code>SPROXY  SXMB_MONI</code></li></ul><h2 id="代码编写位置"><a href="#代码编写位置" class="headerlink" title="代码编写位置"></a>代码编写位置</h2><blockquote><p>因为这个系统没有配置，所以以下步骤图为网图</p></blockquote><p>编写po代码需要在Sproxy找到配置好的接收方或发送方对象进行类生成，然后在类里面代码编写，数据传入的代码应该写在接口里，而数据传出的代码应该是写在调用对象上，比如sap系统需要发送一组数据到另外一个系统上，那么首先需要在out对象里实现传出方法，如果是点击按钮进行传出的话，需要在按钮的PAI事件里面创建out对象类然后调用刚才实现的传出方法并且获取返回值并判断传输状态。</p><h3 id="接收方代码编写方法"><a href="#接收方代码编写方法" class="headerlink" title="接收方代码编写方法"></a>接收方代码编写方法</h3><p>进入事务码：<code>SPROXY</code></p><p>根据<strong>组件名称</strong>、<strong>命名空间</strong>、<strong>接口名</strong>找到对应的输入<strong>接口</strong></p><p>双击<strong>创建</strong>-》<strong>分配包</strong>-》<strong>请求号</strong>-》<strong>输入前缀</strong>，系统自动根据PI的配置生成<strong>输入输出参数</strong>及其参考<strong>数据结构</strong></p><p>双击<strong>provider class</strong>名进入对应<strong>class</strong>进行代码编写</p><p><img src="https://img2018.cnblogs.com/blog/1652737/201905/1652737-20190508145051608-1652809666.png" alt="步骤一"></p><p><img src="https://img2018.cnblogs.com/blog/1652737/201905/1652737-20190508145318194-444009598.png" alt="步骤二"></p><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107201110961.png" alt="步骤三"></p><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107201146551.png" alt="步骤四"></p><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107201641367.png" alt="步骤五"></p><h3 id="发送方代码编写方法"><a href="#发送方代码编写方法" class="headerlink" title="发送方代码编写方法"></a>发送方代码编写方法</h3><blockquote><p>发送方的代码是放在发送方系统中的</p></blockquote><p>根据<strong>组件名称</strong>、<strong>命名空间</strong>、<strong>接口名</strong>找到对应的输出<strong>接口</strong></p><p>双击<strong>创建</strong>-》<strong>分配包</strong>-》<strong>请求号</strong>-》<strong>输入前缀</strong>，系统自动根据PI的配置生成<strong>输入输出参数</strong>及其参考<strong>数据结构</strong></p><p>双击<strong>provider class</strong>名进入对应<strong>class</strong>进行代码编写</p><h3 id="发送方代码调用示例代码"><a href="#发送方代码调用示例代码" class="headerlink" title="发送方代码调用示例代码"></a>发送方代码调用示例代码</h3><p>代码编写流程：</p><ol><li>创建编写好的发送方类</li><li>编写完成类里面的代码</li><li>在调用程序中，比如说<code>dialog</code>程序中创建包含文件<code>ZSDR0071F01</code></li><li>在要触发数据发送的按钮的PAI事件中使用<code>perform ZSDR0071F01</code>调用</li></ol><p><img src="https://raw.githubusercontent.com/Yan-Cam/blogPictureHost/main/image-20231107202422056.png" alt="包含文件"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>ABAP</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>SAP</tag>
+      
+      <tag>ABAP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>RFC调用</title>
     <link href="/unrpyc/2023/10/27/RFC%E8%B0%83%E7%94%A8/"/>
     <url>/unrpyc/2023/10/27/RFC%E8%B0%83%E7%94%A8/</url>
